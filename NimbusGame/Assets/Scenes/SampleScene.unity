@@ -875,7 +875,7 @@ GameObject:
   - component: {fileID: 1457794025}
   - component: {fileID: 1457794028}
   - component: {fileID: 1457794029}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemi
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1079,7 +1079,7 @@ GameObject:
   - component: {fileID: 1620923873}
   - component: {fileID: 1620923875}
   - component: {fileID: 1620923874}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Hit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1314,7 +1314,7 @@ GameObject:
   - component: {fileID: 1978610424}
   - component: {fileID: 1978610426}
   - component: {fileID: 1978610425}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Range
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1463,6 +1463,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
+  EnemyLayer:
+    serializedVersion: 2
+    m_Bits: 128
   onGround: 0
   onWall: 0
   onRightWall: 0
