@@ -67,6 +67,20 @@ public class Movement : MonoBehaviour
 		//Está en pared? presionando agarrarse? se puede mover?
 		if (coll.onWall && Input.GetButton("Fire2") && canMove)
 		{
+			//SI estás pegado a la pared derecha, gira el sprite a la derecha
+			if(coll.onRightWall){
+				side = -1;
+				Vector3 scale = transform.localScale;
+				scale.x = side;
+				transform.localScale = scale;
+			}
+			//Si estás pegado a la pared izquierda, gira el sprite a la izquierda
+			if(coll.onLeftWall){
+				side = 1;
+				Vector3 scale = transform.localScale;
+				scale.x = side;
+				transform.localScale = scale;
+			}
 			//Está agarrando un muro
 			wallGrab = true;
 			animator.SetBool("isClimbing", true);
@@ -260,9 +274,7 @@ public class Movement : MonoBehaviour
 		//Si No estás haciendo walljump (Movimiento normal)
 		if (!wallJumped)
 		{
-			//Resetea animaciones
-			animator.SetBool("isJumping", false);
-			animator.SetBool("isClimbing", false);
+		
 			//cambia x, conserva el salto o la caida en y
 			rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
 		}

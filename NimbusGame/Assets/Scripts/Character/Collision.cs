@@ -7,6 +7,7 @@ public class Collision : MonoBehaviour
 	//Variable donde se le colocan los layers con los que se colisiona
 	[Header("Layers")]
 	public LayerMask groundLayer;
+	public LayerMask EnemyLayer;
 	
 	//Booleano para saber si está en el suelo o en una pared(se va a actualizar cada frame)
 	[Space]
@@ -33,8 +34,14 @@ public class Collision : MonoBehaviour
 	// Revisa si está tocando los layer elegidos cada frame, según la burbuja
     void Update()
 	{
-		//Revisa el suelo
-		onGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius, groundLayer);
+		//Saltar enemigos
+		onGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius, EnemyLayer);
+		if(!onGround){
+			//Revisa el suelo
+			onGround = Physics2D.OverlapCircle((Vector2)transform.position + bottomOffset, collisionRadius, groundLayer);
+		}
+		
+		
 		//Revisa si está pegado en la pared derecha
 		onRightWall = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset, collisionRadius, groundLayer);
 		//Revisa si está pegado a la pared izquierda
@@ -43,6 +50,10 @@ public class Collision : MonoBehaviour
 		//Revisa si está en alguna pared
 		onWall = onRightWall || onLeftWall;
 		//Revisa CUAL pared
-	    wallSide = onRightWall ? -1 : 1;   
+		wallSide = onRightWall ? -1 : 1;   
+	    
+		if(onRightWall==true){
+			print("ok");
+		}
     }
 }
