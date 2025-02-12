@@ -58,7 +58,6 @@ public class Movement : MonoBehaviour
 		float y = Input.GetAxis("Vertical");
 		//Valores directos sin decimales, solo la dirección
 		float xRaw = Input.GetAxisRaw("Horizontal");
-		float yRaw = Input.GetAxisRaw("Vertical");
 		//Valores de movimiento dentro del Vector2
 		Vector2 dir = new Vector2(x, y);
 		
@@ -70,12 +69,16 @@ public class Movement : MonoBehaviour
 		{
 			//Está agarrando un muro
 			wallGrab = true;
+			animator.SetBool("isClimbing", true);
+			animator.SetBool("isJumping", false);
 		}
 		//solo está presionando agarrar? o NO está pegado pared? o No se puede mover?
 		if (Input.GetButtonUp("Fire2") || !coll.onWall || !canMove)
 		{
 			//Entonces no se está agarrando
 			wallGrab = false;
+			animator.SetBool("isClimbing", false);
+			
 		}
 		
 		//Está en el suelo? y No está dasheando
@@ -95,8 +98,8 @@ public class Movement : MonoBehaviour
 			if(x > .2f || x < -.2f)
 				rb.velocity = new Vector2(rb.velocity.x, 0);
 			
-			//Escala lentamente, baja rapido
-			float speedModifier = y > 0 ? .5f : 1;
+			//Escala a estas velocidades
+			float speedModifier = y > 0 ? 1.5f : 1;
 
 			rb.velocity = new Vector2(rb.velocity.x, y * (speed * speedModifier));
 		}
@@ -109,6 +112,7 @@ public class Movement : MonoBehaviour
 		//Salta presionando Espacio
 		if (Input.GetButtonDown("Jump"))
 		{
+			animator.SetBool("isJumping", true);
 			//Si está en el suelo, salta hacia arriba
 			if (coll.onGround)
 				Jump(Vector2.up, false);
@@ -120,12 +124,14 @@ public class Movement : MonoBehaviour
 		if (Input.GetButtonDown("Fire3") && !hasDashed)
 		{
 			//Dashea con estos valores enteros
-			if(xRaw != 0 || yRaw != 0)
-				Dash(xRaw, yRaw);
+			if(xRaw != 0)
+				Dash(xRaw);
 		}
 		//SI está en el suelo (antes estaba en el aire), hay que cambiar las variables
 		if (coll.onGround && !groundTouch)
 		{
+			animator.SetBool("isJumping", false);
+			animator.SetBool("isClimbing", false);
 			GroundTouch();
 			groundTouch = true;
 		}
@@ -134,26 +140,34 @@ public class Movement : MonoBehaviour
 		{
 			groundTouch = false;
 		}
-
-		//Si está agarrandose a la pared, o está wallJumpeando
-		if (wallGrab || !canMove)
-			return;
+			
+		/*está wallJumpeando
+		if (!canMove)
+			//animator.SetBool("isJumping", false);
+		return;*/
+			
 		
-		//Cambiar la dirección del sprite y de la variable side
-		if(x > 0)
-		{
-			side = -1;
-			Vector3 scale = transform.localScale;
-			scale.x = side;
-			transform.localScale = scale;
+		//Cambiar la dirección del sprite y de la variable side si no esta agarrando una pared
+		if (wallGrab==true){
+			animator.SetBool("isClimbing", true);
+			return;
 		}
-		if (x < 0)
-		{
-			//Se gira el sprite
-			side = 1;
-			Vector3 scale = transform.localScale;
-			scale.x = side;
-			transform.localScale = scale;
+		else{
+			if(x > 0)
+			{
+				side = -1;
+				Vector3 scale = transform.localScale;
+				scale.x = side;
+				transform.localScale = scale;
+			}
+			if (x < 0)
+			{
+				//Se gira el sprite
+				side = 1;
+				Vector3 scale = transform.localScale;
+				scale.x = side;
+				transform.localScale = scale;
+			}
 		}
 
 
@@ -164,10 +178,13 @@ public class Movement : MonoBehaviour
 		//No has dasheado, caíste
 		hasDashed = false;
 		isDashing = false;
+		//Resetea la animacion
+		animator.SetBool("isJumping", false);
+		animator.SetBool("isClimbing", false);
 
 	}
 	//Dash moment. Necesitamos la dirección
-	private void Dash(float x, float y)
+	private void Dash(float x)
 	{
 		//En efecto está dasheando
 		hasDashed = true;
@@ -175,7 +192,7 @@ public class Movement : MonoBehaviour
 		//La velocidad del personaje debe ser cero.
 		rb.velocity = Vector2.zero;
 		//Saquemos la dirección elegida
-		Vector2 dir = new Vector2(x, y);
+		Vector2 dir = new Vector2(x, 0);
 		//Muevete en la dirección elegida la cantidad de dash que tengas
 		rb.velocity += dir.normalized * dashSpeed;
 		//Cooldown
@@ -243,6 +260,9 @@ public class Movement : MonoBehaviour
 		//Si No estás haciendo walljump (Movimiento normal)
 		if (!wallJumped)
 		{
+			//Resetea animaciones
+			animator.SetBool("isJumping", false);
+			animator.SetBool("isClimbing", false);
 			//cambia x, conserva el salto o la caida en y
 			rb.velocity = new Vector2(dir.x * speed, rb.velocity.y);
 		}
@@ -256,9 +276,9 @@ public class Movement : MonoBehaviour
 	private void Jump(Vector2 dir, bool wall)
 	{
 		//Literalmente en la dirección indicada
+		animator.SetBool("isJumping", true);
 		rb.velocity = new Vector2(rb.velocity.x, 0);
 		rb.velocity += dir * jumpForce;
-
 	}
 	//Cooldown para cuando se haga un walljump
 	IEnumerator DisableMovement(float time)
