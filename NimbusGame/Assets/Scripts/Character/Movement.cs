@@ -29,6 +29,7 @@ public class Movement : MonoBehaviour
 	public bool wallGrab;
 	public bool wallJumped;
 	public bool isDashing;
+	private bool canAttack = true;
 	
 	private bool groundTouch = true;
 	private bool hasDashed = false;
@@ -86,6 +87,13 @@ public class Movement : MonoBehaviour
 			animator.SetBool("isClimbing", true);
 			animator.SetBool("isJumping", false);
 		}
+		//Para atacar
+		//Condiciones para que no ataque saltando o agarrandose... o ya veremos
+		if (Input.GetButtonUp("Fire1") && canAttack)
+		{
+			StartCoroutine(Attack());	
+		}
+		
 		//solo está presionando agarrar? o NO está pegado pared? o No se puede mover?
 		if (Input.GetButtonUp("Fire2") || !coll.onWall || !canMove)
 		{
@@ -169,6 +177,8 @@ public class Movement : MonoBehaviour
 		else{
 			if(x > 0)
 			{
+				if(side ==1)
+					animator.SetBool("isAttack", false);
 				side = -1;
 				Vector3 scale = transform.localScale;
 				scale.x = side;
@@ -176,6 +186,8 @@ public class Movement : MonoBehaviour
 			}
 			if (x < 0)
 			{
+				if(side ==-1)
+					animator.SetBool("isAttack", false);
 				//Se gira el sprite
 				side = 1;
 				Vector3 scale = transform.localScale;
@@ -185,6 +197,16 @@ public class Movement : MonoBehaviour
 		}
 
 
+	}
+	
+	private IEnumerator Attack(){
+		//Ataca pero con un cooldown
+		canAttack = false;
+		animator.SetBool("isAttack",true);
+		//Detente este tiempo (Es la duración de la animacióñ de ataque)
+		yield return new WaitForSeconds(0.338f);
+		animator.SetBool("isAttack",false);
+		canAttack = true;
 	}
 	//Despues de caer debes resetear la variables
 	void GroundTouch()
