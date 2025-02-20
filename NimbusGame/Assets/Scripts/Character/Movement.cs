@@ -245,10 +245,10 @@ public class Movement : MonoBehaviour
 		wallJumped = true;
 		//Está en el estado de dasheo
 		isDashing = true;
-		
+		animator.SetBool("isDashing",true);
 		//Pausa este proceso temporalmente
 		yield return new WaitForSeconds(.3f);
-
+		animator.SetBool("isDashing",false);
 		//Regresemos a la normalidad. Nada pasó aqui...
 		rb.gravityScale = 3;
 		GetComponent<BetterJumping>().enabled = true;
