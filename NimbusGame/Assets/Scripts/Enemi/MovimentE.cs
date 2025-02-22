@@ -1,9 +1,9 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovimentE : MonoBehaviour
 {
+    // Variables de comportamiento y movimiento
     public int rutina;
     public float cronometro;
     public Animator ani;
@@ -13,12 +13,12 @@ public class MovimentE : MonoBehaviour
     public GameObject target;
     public bool atacando;
 
+    // Variables de detección del jugador
     public float rango_vision;
+    public float rango_vision_vertical;
     public float rango_ataque;
-    public GameObject rango;
-    public GameObject Hit;
 
-    // Detección de colisiones
+    // Variables de detección de colisiones
     public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     public LayerMask groundLayer;
@@ -29,6 +29,12 @@ public class MovimentE : MonoBehaviour
     public LayerMask obstacleLayer;
     private bool wallDetected;
 
+    // Variables de ataque
+    public float cooldownGolpe = 1.0f; // Tiempo de espera entre golpes
+    private float tiempoUltimoGolpe = 0; // Tiempo del último golpe
+    public HitEnemi hitScript;
+
+    // Variables internas
     private Rigidbody2D rb;
 
     void Start()
@@ -36,6 +42,9 @@ public class MovimentE : MonoBehaviour
         ani = GetComponent<Animator>();
         target = GameObject.Find("Player");
         rb = GetComponent<Rigidbody2D>();
+
+        // Ignorar colisiones entre el enemigo y el jugador
+        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), target.GetComponent<Collider2D>(), true);
     }
 
     void Update()
@@ -61,12 +70,14 @@ public class MovimentE : MonoBehaviour
 
     void DetectarJugador()
     {
-        float distancia = transform.position.x - target.transform.position.x;
+        float distanciaX = transform.position.x - target.transform.position.x;
+        float distanciaY = transform.position.y - target.transform.position.y;
 
-        if (Mathf.Abs(distancia) < rango_vision)
+        // Verificar si el jugador está dentro del rango de visión en ambos ejes
+        if (Mathf.Abs(distanciaX) < rango_vision && Mathf.Abs(distanciaY) < rango_vision_vertical)
         {
             // Si el jugador está detrás, girar hacia él
-            if ((distancia > 0 && direccion == 0) || (distancia < 0 && direccion == 1))
+            if ((distanciaX > 0 && direccion == 0) || (distanciaX < 0 && direccion == 1))
             {
                 ChangeDirection();
             }
@@ -75,50 +86,62 @@ public class MovimentE : MonoBehaviour
 
     public void Comportamientos()
     {
-        float distancia = Mathf.Abs(transform.position.x - target.transform.position.x);
+        float distanciaX = Mathf.Abs(transform.position.x - target.transform.position.x);
+        float distanciaY = Mathf.Abs(transform.position.y - target.transform.position.y);
 
-        if (distancia > rango_vision && !atacando)
+        if (!atacando)
         {
-            ani.SetBool("Run", false);
-            cronometro += Time.deltaTime;
-            if (cronometro >= 4)
+            // Si el jugador está dentro del rango de visión horizontal y vertical
+            if (distanciaX < rango_vision && distanciaY < rango_vision_vertical)
             {
-                rutina = Random.Range(0, 2);
-                cronometro = 0;
-            }
-            switch (rutina)
-            {
-                case 0:
+                // Si el jugador está dentro del rango de ataque
+                if (distanciaX < rango_ataque)
+                {
+                    // Verificar si ha pasado el tiempo de cooldown
+                    if (Time.time >= tiempoUltimoGolpe + cooldownGolpe)
+                    {
+                        StartCoroutine(IniciarAtaque());
+                    }
+                    else
+                    {
+                        // Si está en cooldown, volver al estado idle
+                        ani.SetBool("Attack", false);
+                        ani.SetBool("Walk", false);
+                        ani.SetBool("Run", false);
+                    }
+                }
+                else // Si el jugador está fuera del rango de ataque pero dentro del rango de visión
+                {
                     ani.SetBool("Walk", false);
-                    rb.velocity = new Vector2(0, rb.velocity.y); // Detenerse
-                    break;
-                case 1:
-                    direccion = Random.Range(0, 2);
-                    rutina++;
-                    break;
-                case 2:
-                    Move(speed_walk);
-                    ani.SetBool("Walk", true);
-                    break;
+                    ani.SetBool("Run", true);
+                    Move(speed_run);
+                    ani.SetBool("Attack", false);
+                }
             }
-        }
-        else
-        {
-            if (distancia > rango_ataque && !atacando)
+            else // Si el jugador está fuera del rango de visión
             {
-                ani.SetBool("Walk", false);
-                ani.SetBool("Run", true);
-                Move(speed_run);
-                ani.SetBool("Attack", false);
-            }
-            else if (!atacando)
-            {
-                // Si está en rango de ataque, se detiene y ataca
-                rb.velocity = new Vector2(0, rb.velocity.y);
-                ani.SetBool("Walk", false);
                 ani.SetBool("Run", false);
-                ani.SetBool("Attack", true);
-                atacando = true;
+                cronometro += Time.deltaTime;
+                if (cronometro >= 4)
+                {
+                    rutina = Random.Range(0, 2);
+                    cronometro = 0;
+                }
+                switch (rutina)
+                {
+                    case 0:
+                        ani.SetBool("Walk", false);
+                        rb.velocity = new Vector2(0, rb.velocity.y); // Detenerse
+                        break;
+                    case 1:
+                        direccion = Random.Range(0, 2);
+                        rutina++;
+                        break;
+                    case 2:
+                        Move(speed_walk);
+                        ani.SetBool("Walk", true);
+                        break;
+                }
             }
         }
     }
@@ -126,9 +149,9 @@ public class MovimentE : MonoBehaviour
     void Move(float speed)
     {
         float moveDirection = (direccion == 0) ? 1 : -1; // Determina la dirección
-        rb.velocity = new Vector2(moveDirection * speed, rb.velocity.y); // Aplica movimiento
+        rb.velocity = new Vector2(moveDirection * speed, rb.velocity.y);
 
-        // Cambiar la dirección del personaje y animación
+        // Cambiar la dirección del sprite
         if (moveDirection > 0)
         {
             transform.rotation = Quaternion.Euler(0, 0, 0); // Mirar a la derecha
@@ -137,9 +160,6 @@ public class MovimentE : MonoBehaviour
         {
             transform.rotation = Quaternion.Euler(0, 180, 0); // Mirar a la izquierda
         }
-
-        // Actualizar la animación según la velocidad
-        ani.SetFloat("Speed", Mathf.Abs(rb.velocity.x));
     }
 
     void ChangeDirection()
@@ -148,20 +168,26 @@ public class MovimentE : MonoBehaviour
         direccion = (direccion == 0) ? 1 : 0;
     }
 
-    public void Final_Ani()
+    IEnumerator IniciarAtaque()
     {
+        atacando = true; // Bloquear movimiento mientras ataca
+        rb.velocity = Vector2.zero; // Detener movimiento
+        ani.SetBool("Attack", true);
+        ani.SetBool("Walk", false);
+        ani.SetBool("Run", false);
+
+        yield return new WaitForSeconds(0.0f); // Delay antes de golpear
+
+        // Verificar si ha pasado el tiempo de cooldown desde el último golpe
+        if (Time.time >= tiempoUltimoGolpe + cooldownGolpe)
+        {
+            hitScript?.DetectarGolpe(); // Ejecutar el golpe
+            tiempoUltimoGolpe = Time.time; // Registrar el momento del último golpe
+        }
+
+        yield return new WaitForSeconds(0.5f); // Delay después de golpear
+
         ani.SetBool("Attack", false);
-        atacando = false;
-        rango.GetComponent<BoxCollider2D>().enabled = true;
-    }
-
-    public void ColliderWeaponTrue()
-    {
-        Hit.GetComponent<BoxCollider2D>().enabled = true;
-    }
-
-    public void ColliderWeaponFalse()
-    {
-        Hit.GetComponent<BoxCollider2D>().enabled = false;
+        atacando = false; // Permitir moverse nuevamente
     }
 }

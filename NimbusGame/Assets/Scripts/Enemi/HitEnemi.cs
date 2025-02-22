@@ -4,25 +4,59 @@ using UnityEngine;
 
 public class HitEnemi : MonoBehaviour
 {
-    public Collider2D hitboxCollider; // Asigna el collider específico en el Inspector
+    // Radio del área de golpe
+    public float radioGolpe = 0.5f;
 
-    void OnTriggerEnter2D(Collider2D coll)
+    // Capa del jugador para detectar colisiones
+    public LayerMask capaJugador;
+
+    // Punto de referencia donde ocurre el golpe 
+    public Transform puntoGolpe;
+
+    // Tiempo de espera entre golpes
+    public float cooldownGolpe = 1.0f;
+
+    // Tiempo del último golpe
+    private float tiempoUltimoGolpe = 0;
+
+    void Update()
     {
-        if (coll.CompareTag("Player") && coll.isTrigger)
+        // Llamar al método de detección de golpe en cada frame
+        DetectarGolpe();
+    }
+
+    /// Detecta si el golpe del enemigo impacta al jugador.
+    public void DetectarGolpe()
+    {
+        // Verificar si ha pasado el tiempo de cooldown desde el último golpe
+        if (Time.time >= tiempoUltimoGolpe + cooldownGolpe)
         {
-            print("Daño");
+            // Verificar si hay un collider del jugador dentro del área de golpe
+            Collider2D jugador = Physics2D.OverlapCircle(puntoGolpe.position, radioGolpe, capaJugador);
+
+            if (jugador != null)
+            {
+                // detecta al jugador, imprimir un mensaje en la consola
+                print("¡Golpe al jugador!");
+
+                // función para aplicar daño al jugador
+  
+                // Registrar el momento del último golpe
+                tiempoUltimoGolpe = Time.time;
+            }
         }
     }
 
-    // Start is called before the first frame update
-    void Start()
+    /// Dibuja un gizmo en el Editor para visualizar el área de golpe.
+    void OnDrawGizmosSelected()
     {
-        
-    }
+        if (puntoGolpe != null)
+        {
+            // color del gizmo a rojo
+            Gizmos.color = Color.red;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+            // Dibujar una esfera wireframe en la posición del punto de golpe
+            Gizmos.DrawWireSphere(puntoGolpe.position, radioGolpe);
+        }
     }
 }
