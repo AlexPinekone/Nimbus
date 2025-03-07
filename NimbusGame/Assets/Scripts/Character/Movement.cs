@@ -33,6 +33,8 @@ public class Movement : MonoBehaviour
 	
 	private bool groundTouch = true;
 	private bool hasDashed = false;
+	
+	private float _fallSpeedYDampingChangeThreshold;
 
 	public int side = 1;
 	
@@ -44,6 +46,8 @@ public class Movement : MonoBehaviour
 		coll = GetComponent<Collision>();
 		//Obtiene el elemento que anima
 		animator = GetComponent<Animator>();
+		
+		_fallSpeedYDampingChangeThreshold = CameraManager.instance._fallSpeedYDampingChangeThreshold;
 	}
 	//En lugar de llamarse cada frame, se llama de forma fija.
 	private void FixedUpdate()
@@ -61,6 +65,20 @@ public class Movement : MonoBehaviour
 		float xRaw = Input.GetAxisRaw("Horizontal");
 		//Valores de movimiento dentro del Vector2
 		Vector2 dir = new Vector2(x, y);
+		
+		//Si caemos tras pasar cierta velocidad
+		if (rb.velocity.y < _fallSpeedYDampingChangeThreshold && !CameraManager.instance.IsLerpingYDamping && !CameraManager.instance.LerpedFromPlayerFalling)
+		{
+			CameraManager.instance.LerpYDamping(true);
+		}
+		//Si estamos quietos o moviendo
+		if (rb.velocity.y >= 0f && CameraManager.instance.IsLerpingYDamping && CameraManager.instance.LerpedFromPlayerFalling)
+		{
+			//Se resetea
+			CameraManager.instance.LerpedFromPlayerFalling = false;
+			
+			CameraManager.instance.LerpYDamping(false);
+		}
 		
 		//Llamada a la función que mueve al personaje lo indicado
 		Walk(dir);
