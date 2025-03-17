@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
 	{
 		playerNewPosition = position;
 		changePosition = true;
+		//FindObjectOfType<ScreenFade>().LoadScene(levelName);
 		SceneManager.LoadScene(levelName);
 	}
 }
