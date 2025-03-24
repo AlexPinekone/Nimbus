@@ -19,6 +19,9 @@ public class HitEnemi : MonoBehaviour
     // Tiempo del último golpe
     private float tiempoUltimoGolpe = 0;
 
+    // Cantidad de daño que inflige el enemigo
+    public int daño = 1; 
+
     void Update()
     {
         // Llamar al método de detección de golpe en cada frame
@@ -36,11 +39,14 @@ public class HitEnemi : MonoBehaviour
 
             if (jugador != null)
             {
-                // detecta al jugador, imprimir un mensaje en la consola
-                print("¡Golpe al jugador!");
 
                 // función para aplicar daño al jugador
-  
+                HealthPlayer saludJugador = jugador.GetComponent<HealthPlayer>();
+                if (saludJugador != null)
+                {
+                    saludJugador.RecibirDaño(daño);
+                }
+
                 // Registrar el momento del último golpe
                 tiempoUltimoGolpe = Time.time;
             }

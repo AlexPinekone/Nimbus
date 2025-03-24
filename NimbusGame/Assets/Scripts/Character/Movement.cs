@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
@@ -38,6 +39,19 @@ public class Movement : MonoBehaviour
 
 	public int side = 1;
 	
+	//Estamina
+	[Space]
+	[Header("Barra de estamina")]
+	
+	public int estaminaMaxima = 3;
+	public int estaminaActual;
+
+	// Referencia al objeto de la vida dentro de UI (el que cambia de sprite)
+	public Image estaminaUI;
+
+	// Array con los 3 sprites correspondientes a la vida
+	public Sprite[] spritesEstamina;
+	
 	void Start()
 	{
 		//Obtiene el rigidBody del jugador
@@ -48,6 +62,18 @@ public class Movement : MonoBehaviour
 		animator = GetComponent<Animator>();
 		
 		_fallSpeedYDampingChangeThreshold = CameraManager.instance._fallSpeedYDampingChangeThreshold;
+		
+		estaminaActual = estaminaMaxima;
+		ActualizarBarraEstamina();
+	}
+	
+	void ActualizarBarraEstamina()
+	{
+		if (estaminaUI != null && spritesEstamina.Length == 3)
+		{
+			int indice = Mathf.Clamp(estaminaActual, 0, 2);  // Asegura que el �ndice est� dentro de los 3 sprites
+			estaminaUI.sprite = spritesEstamina[indice];
+		}
 	}
 	//En lugar de llamarse cada frame, se llama de forma fija.
 	private void FixedUpdate()
@@ -58,6 +84,8 @@ public class Movement : MonoBehaviour
 	
 	void Update()
 	{
+		//Estamina
+		ActualizarBarraEstamina();
 		//Obtiene la flecha que está presionando para moverse
 		float x = Input.GetAxis("Horizontal");
 		float y = Input.GetAxis("Vertical");
@@ -216,18 +244,38 @@ public class Movement : MonoBehaviour
 
 
 	}
-	
-	private IEnumerator Attack(){
-		//Ataca pero con un cooldown
-		canAttack = false;
-		animator.SetBool("isAttack",true);
-		//Detente este tiempo (Es la duración de la animacióñ de ataque)
-		yield return new WaitForSeconds(0.338f);
-		animator.SetBool("isAttack",false);
-		canAttack = true;
-	}
-	//Despues de caer debes resetear la variables
-	void GroundTouch()
+
+    public IEnumerator Attack()
+    {
+        if (!canAttack) yield break;
+
+        canAttack = false;
+        animator.SetBool("isAttack", true);
+
+        print("¡El jugador está atacando!");
+
+        // Buscar el componente HitPlayer
+        HitPlayer hitPlayer = GetComponentInChildren<HitPlayer>();
+        if (hitPlayer != null)
+        {
+            print("HitPlayer encontrado, llamando a IntentarGolpear()...");
+            hitPlayer.IntentarGolpear();
+        }
+        else
+        {
+            print("⚠️ Error: No se encontró el script HitPlayer en el jugador.");
+        }
+
+        // Esperar la duración del ataque
+        yield return new WaitForSeconds(0.338f);
+
+        animator.SetBool("isAttack", false);
+        canAttack = true;
+    }
+
+
+    //Despues de caer debes resetear la variables
+    void GroundTouch()
 	{
 		//No has dasheado, caíste
 		hasDashed = false;
@@ -240,6 +288,8 @@ public class Movement : MonoBehaviour
 	//Dash moment. Necesitamos la dirección
 	private void Dash(float x)
 	{
+		//Baja la barra de estamina
+		estaminaActual -= 1;
 		//En efecto está dasheando
 		hasDashed = true;
 		
