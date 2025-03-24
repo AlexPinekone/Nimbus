@@ -1,4 +1,4 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 using UnityEngine.UI;  // Necesario para manejar UI
 
 public class HealthPlayer : MonoBehaviour
@@ -18,16 +18,16 @@ public class HealthPlayer : MonoBehaviour
         ActualizarBarraVida();
     }
 
-    public void RecibirDaño(int daño)
+	public void RecibirDano(int dano)
     {
-        vidaActual -= daño;
+	    vidaActual -= dano;
         vidaActual = Mathf.Clamp(vidaActual, 0, vidaMaxima);
         ActualizarBarraVida();
 
         if (vidaActual <= 0)
         {
-            print("¡Jugador muerto!");
-            // Aquí podrías agregar la lógica de muerte
+            print("ï¿½Jugador muerto!");
+            // Aquï¿½ podrï¿½as agregar la lï¿½gica de muerte
         }
     }
 
@@ -35,7 +35,7 @@ public class HealthPlayer : MonoBehaviour
     {
         if (vidaUI != null && spritesVida.Length == 7)
         {
-            int indice = Mathf.Clamp(vidaActual, 0, 6);  // Asegura que el índice esté dentro de los 7 sprites
+	        int indice = Mathf.Clamp(vidaActual, 0, 6);  // Asegura que el ï¿½ndice estï¿½ dentro de los 7 sprites
             vidaUI.sprite = spritesVida[indice];
         }
     }

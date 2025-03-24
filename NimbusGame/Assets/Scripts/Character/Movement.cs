@@ -65,6 +65,7 @@ public class Movement : MonoBehaviour
 		
 		estaminaActual = estaminaMaxima;
 		ActualizarBarraEstamina();
+		estaminaActual -= 1;
 	}
 	
 	void ActualizarBarraEstamina()

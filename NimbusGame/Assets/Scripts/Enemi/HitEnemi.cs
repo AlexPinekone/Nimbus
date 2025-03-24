@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class HitEnemi : MonoBehaviour
 {
-    // Radio del área de golpe
+    // Radio del ï¿½rea de golpe
     public float radioGolpe = 0.5f;
 
     // Capa del jugador para detectar colisiones
@@ -16,44 +16,44 @@ public class HitEnemi : MonoBehaviour
     // Tiempo de espera entre golpes
     public float cooldownGolpe = 1.0f;
 
-    // Tiempo del último golpe
+    // Tiempo del ï¿½ltimo golpe
     private float tiempoUltimoGolpe = 0;
 
-    // Cantidad de daño que inflige el enemigo
-    public int daño = 1; 
+    // Cantidad de daï¿½o que inflige el enemigo
+	public int dano = 1; 
 
     void Update()
     {
-        // Llamar al método de detección de golpe en cada frame
+        // Llamar al mï¿½todo de detecciï¿½n de golpe en cada frame
         DetectarGolpe();
     }
 
     /// Detecta si el golpe del enemigo impacta al jugador.
     public void DetectarGolpe()
     {
-        // Verificar si ha pasado el tiempo de cooldown desde el último golpe
+        // Verificar si ha pasado el tiempo de cooldown desde el ï¿½ltimo golpe
         if (Time.time >= tiempoUltimoGolpe + cooldownGolpe)
         {
-            // Verificar si hay un collider del jugador dentro del área de golpe
+            // Verificar si hay un collider del jugador dentro del ï¿½rea de golpe
             Collider2D jugador = Physics2D.OverlapCircle(puntoGolpe.position, radioGolpe, capaJugador);
 
             if (jugador != null)
             {
 
-                // función para aplicar daño al jugador
+                // funciï¿½n para aplicar daï¿½o al jugador
                 HealthPlayer saludJugador = jugador.GetComponent<HealthPlayer>();
                 if (saludJugador != null)
                 {
-                    saludJugador.RecibirDaño(daño);
+	                saludJugador.RecibirDano(dano);
                 }
 
-                // Registrar el momento del último golpe
+                // Registrar el momento del ï¿½ltimo golpe
                 tiempoUltimoGolpe = Time.time;
             }
         }
     }
 
-    /// Dibuja un gizmo en el Editor para visualizar el área de golpe.
+    /// Dibuja un gizmo en el Editor para visualizar el ï¿½rea de golpe.
     void OnDrawGizmosSelected()
     {
         if (puntoGolpe != null)
@@ -61,7 +61,7 @@ public class HitEnemi : MonoBehaviour
             // color del gizmo a rojo
             Gizmos.color = Color.red;
 
-            // Dibujar una esfera wireframe en la posición del punto de golpe
+            // Dibujar una esfera wireframe en la posiciï¿½n del punto de golpe
             Gizmos.DrawWireSphere(puntoGolpe.position, radioGolpe);
         }
     }
