@@ -12,6 +12,11 @@
 sysinfo.txt
 # Unity3D generated meta files
 *.pidb.meta
+*.unitypackage
+*.apk
+*.aab
+*.log
+*.log.gz
 
 ###
 # VS/MD solution and project files
@@ -41,3 +46,10 @@ sysinfo.txt
 Icon?
 ehthumbs.db
 Thumbs.db
+
+###
+# Unity Logs and Auto-Saves
+###
+Logs/
+Logs/**
+AutoSave/**
