@@ -45,6 +45,7 @@ GameObject:
   - component: {fileID: 8806419828455983359}
   - component: {fileID: 6743814847920267488}
   - component: {fileID: 8517028403122961084}
+  - component: {fileID: 49811619552515375}
   m_Layer: 7
   m_Name: Enemi
   m_TagString: Untagged
@@ -60,9 +61,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4249383976147341885}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.132, y: -0.771, z: -0.028862206}
-  m_LocalScale: {x: 2.054972, y: 2.237967, z: 1}
+  m_LocalScale: {x: 2.05497, y: 2.2379699, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8772806826556721989}
@@ -252,6 +253,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.49471408, y: 0.30471665}
   m_EdgeRadius: 0
+--- !u!114 &49811619552515375
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4249383976147341885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32f15237b554c7e43916ab69a53bea2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vida: 5
 --- !u!1 &5169719421900550029
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,6 +461,7 @@ MonoBehaviour:
     m_Bits: 1
   puntoGolpe: {fileID: 3642731133162082982}
   cooldownGolpe: 1
+  dano: 1
 --- !u!1 &9019021684381927969
 GameObject:
   m_ObjectHideFlags: 0

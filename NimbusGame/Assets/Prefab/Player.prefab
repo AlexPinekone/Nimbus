@@ -49,6 +49,7 @@ GameObject:
   - component: {fileID: 2712559052992915934}
   - component: {fileID: 2474932349030415528}
   - component: {fileID: 1624559055132147266}
+  - component: {fileID: 8213024064594915964}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -64,7 +65,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6347348833283994472}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.48, y: -1.507, z: -0.028862206}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -219,6 +220,14 @@ MonoBehaviour:
   wallJumped: 0
   isDashing: 0
   side: 1
+  estaminaMaxima: 3
+  estaminaActual: 0
+  estaminaUI: {fileID: 0}
+  spritesEstamina:
+  - {fileID: 839895184, guid: 6021eb05674abc34b953fed3a22da022, type: 3}
+  - {fileID: -1561448248, guid: 48dae10c8c2d78f4aa426488fa4ee2b7, type: 3}
+  - {fileID: 1724190895, guid: 48dae10c8c2d78f4aa426488fa4ee2b7, type: 3}
+  - {fileID: 1022503359, guid: 48dae10c8c2d78f4aa426488fa4ee2b7, type: 3}
 --- !u!114 &3810471916961871514
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -338,6 +347,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4645480c1b61c34a9fd133fcfc39960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8213024064594915964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6347348833283994472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba03695a8bdb578418d35c4080645e29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vidaMaxima: 3
+  vidaActual: 0
+  vidaUI: {fileID: 0}
+  spritesVida:
+  - {fileID: 839895184, guid: 6021eb05674abc34b953fed3a22da022, type: 3}
+  - {fileID: 131299272, guid: 48dae10c8c2d78f4aa426488fa4ee2b7, type: 3}
+  - {fileID: 353254775, guid: 48dae10c8c2d78f4aa426488fa4ee2b7, type: 3}
+  - {fileID: -281149713, guid: 48dae10c8c2d78f4aa426488fa4ee2b7, type: 3}
 --- !u!1 &8133760244553468010
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,4 +416,4 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   puntoGolpe: {fileID: 5486854249495761067}
-  "da\xF1o": 15
+  "da\xF1o": 2

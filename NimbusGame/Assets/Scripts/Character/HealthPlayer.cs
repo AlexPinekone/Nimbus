@@ -3,7 +3,7 @@ using UnityEngine.UI;  // Necesario para manejar UI
 
 public class HealthPlayer : MonoBehaviour
 {
-    public int vidaMaxima = 7;
+	public int vidaMaxima = 3;
     public int vidaActual;
 
     // Referencia al objeto de la vida dentro de UI (el que cambia de sprite)
@@ -33,9 +33,9 @@ public class HealthPlayer : MonoBehaviour
 
     void ActualizarBarraVida()
     {
-        if (vidaUI != null && spritesVida.Length == 7)
+	    if (vidaUI != null && spritesVida.Length == 4)
         {
-	        int indice = Mathf.Clamp(vidaActual, 0, 6);  // Asegura que el �ndice est� dentro de los 7 sprites
+		    int indice = Mathf.Clamp(vidaActual, 0, 3);  // Asegura que el �ndice est� dentro de los 7 sprites
             vidaUI.sprite = spritesVida[indice];
         }
     }

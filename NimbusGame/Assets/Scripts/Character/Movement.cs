@@ -65,14 +65,13 @@ public class Movement : MonoBehaviour
 		
 		estaminaActual = estaminaMaxima;
 		ActualizarBarraEstamina();
-		estaminaActual -= 1;
 	}
 	
 	void ActualizarBarraEstamina()
 	{
-		if (estaminaUI != null && spritesEstamina.Length == 3)
+		if (estaminaUI != null && spritesEstamina.Length == 4)
 		{
-			int indice = Mathf.Clamp(estaminaActual, 0, 2);  // Asegura que el �ndice est� dentro de los 3 sprites
+			int indice = Mathf.Clamp(estaminaActual, 0, 3);  // Asegura que el �ndice est� dentro de los 3 sprites
 			estaminaUI.sprite = spritesEstamina[indice];
 		}
 	}
@@ -189,8 +188,8 @@ public class Movement : MonoBehaviour
 			if (coll.onWall && !coll.onGround)
 				WallJump();
 		}
-		//Dashear con C. Si no tiene el cooldown activo
-		if (Input.GetButtonDown("Fire3") && !hasDashed)
+		//Dashear con C. Si no tiene el cooldown activo y si aun tiene estamina
+		if (Input.GetButtonDown("Fire3") && !hasDashed && estaminaActual>0)
 		{
 			//Dashea con estos valores enteros
 			if(xRaw != 0)
