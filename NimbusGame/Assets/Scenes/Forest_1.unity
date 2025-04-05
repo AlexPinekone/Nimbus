@@ -362,25 +362,53 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1408465557}
     - target: {fileID: 8246726275915673393, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
+      propertyPath: estaminaMaxima
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246726275915673393, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
       propertyPath: spritesEstamina.Array.size
-      value: 4
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8246726275915673393, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
       propertyPath: spritesEstamina.Array.data[0]
       value: 
-      objectReference: {fileID: 839895184, guid: 6021eb05674abc34b953fed3a22da022, type: 3}
+      objectReference: {fileID: -130500309, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
     - target: {fileID: 8246726275915673393, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
       propertyPath: spritesEstamina.Array.data[1]
       value: 
-      objectReference: {fileID: -1561448248, guid: 48dae10c8c2d78f4aa426488fa4ee2b7, type: 3}
+      objectReference: {fileID: 538355158, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
     - target: {fileID: 8246726275915673393, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
       propertyPath: spritesEstamina.Array.data[2]
       value: 
-      objectReference: {fileID: 1724190895, guid: 48dae10c8c2d78f4aa426488fa4ee2b7, type: 3}
+      objectReference: {fileID: 1211661601, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
     - target: {fileID: 8246726275915673393, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
       propertyPath: spritesEstamina.Array.data[3]
       value: 
-      objectReference: {fileID: 1022503359, guid: 48dae10c8c2d78f4aa426488fa4ee2b7, type: 3}
+      objectReference: {fileID: 1576915439, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
+    - target: {fileID: 8246726275915673393, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
+      propertyPath: spritesEstamina.Array.data[4]
+      value: 
+      objectReference: {fileID: -1893241076, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
+    - target: {fileID: 8246726275915673393, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
+      propertyPath: spritesEstamina.Array.data[5]
+      value: 
+      objectReference: {fileID: -1068052988, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
+    - target: {fileID: 8246726275915673393, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
+      propertyPath: spritesEstamina.Array.data[6]
+      value: 
+      objectReference: {fileID: -5787428, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
+    - target: {fileID: 8246726275915673393, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
+      propertyPath: spritesEstamina.Array.data[7]
+      value: 
+      objectReference: {fileID: 1924789003, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
+    - target: {fileID: 8246726275915673393, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
+      propertyPath: spritesEstamina.Array.data[8]
+      value: 
+      objectReference: {fileID: 728871221, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
+    - target: {fileID: 8246726275915673393, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
+      propertyPath: spritesEstamina.Array.data[9]
+      value: 
+      objectReference: {fileID: 1367611375, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3732,6 +3760,18 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1693222739}
+    - target: {fileID: 1731182066980638906, guid: f59886a9ee2c7c447acfe9f013d1ffbe, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1367611375, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
+    - target: {fileID: 3076697434520211182, guid: f59886a9ee2c7c447acfe9f013d1ffbe, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 4179362316663825397, guid: f59886a9ee2c7c447acfe9f013d1ffbe, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ff8c999eb72b37c4eb9b7efa37811166, type: 3}
     - target: {fileID: 4454079724981505687, guid: f59886a9ee2c7c447acfe9f013d1ffbe, type: 3}
       propertyPath: m_Pivot.x
       value: 0

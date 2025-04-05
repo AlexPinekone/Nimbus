@@ -21,6 +21,7 @@ public class Movement : MonoBehaviour
 	public float slideSpeed = 5;
 	public float wallJumpLerp = 10;
 	public float dashSpeed = 20;
+	public float regenDelay = 0.1f;
 	
 	//Variables para verificar la situación del jugador.
 	[Space]
@@ -34,6 +35,7 @@ public class Movement : MonoBehaviour
 	
 	private bool groundTouch = true;
 	private bool hasDashed = false;
+	private bool isRegen = false;
 	
 	private float _fallSpeedYDampingChangeThreshold;
 
@@ -43,7 +45,7 @@ public class Movement : MonoBehaviour
 	[Space]
 	[Header("Barra de estamina")]
 	
-	public int estaminaMaxima = 3;
+	public int estaminaMaxima = 9;
 	public int estaminaActual;
 
 	// Referencia al objeto de la vida dentro de UI (el que cambia de sprite)
@@ -69,9 +71,9 @@ public class Movement : MonoBehaviour
 	
 	void ActualizarBarraEstamina()
 	{
-		if (estaminaUI != null && spritesEstamina.Length == 4)
+		if (estaminaUI != null && spritesEstamina.Length == 10)
 		{
-			int indice = Mathf.Clamp(estaminaActual, 0, 3);  // Asegura que el �ndice est� dentro de los 3 sprites
+			int indice = Mathf.Clamp(estaminaActual, 0, 9);  // Asegura que el �ndice est� dentro de los 3 sprites
 			estaminaUI.sprite = spritesEstamina[indice];
 		}
 	}
@@ -82,10 +84,28 @@ public class Movement : MonoBehaviour
 		animator.SetFloat("xVelocity", Math.Abs(rb.velocity.x));
 	}
 	
+	IEnumerator RecuperaLaEstamina(){
+		
+		isRegen = true;
+		
+		print("VA que va: " + estaminaActual);
+		while(estaminaActual < estaminaMaxima)
+		{
+			yield return new WaitForSeconds(regenDelay);
+			estaminaActual++;
+		}
+		
+		isRegen = false;
+	}
+	
 	void Update()
 	{
 		//Estamina
 		ActualizarBarraEstamina();
+		//Para recuperar estamina
+		if(!isRegen && estaminaActual < estaminaMaxima){
+			StartCoroutine(RecuperaLaEstamina());
+		}
 		//Obtiene la flecha que está presionando para moverse
 		float x = Input.GetAxis("Horizontal");
 		float y = Input.GetAxis("Vertical");
@@ -189,7 +209,7 @@ public class Movement : MonoBehaviour
 				WallJump();
 		}
 		//Dashear con C. Si no tiene el cooldown activo y si aun tiene estamina
-		if (Input.GetButtonDown("Fire3") && !hasDashed && estaminaActual>0)
+		if (Input.GetButtonDown("Fire3") && !hasDashed && estaminaActual==9)
 		{
 			//Dashea con estos valores enteros
 			if(xRaw != 0)
@@ -289,7 +309,7 @@ public class Movement : MonoBehaviour
 	private void Dash(float x)
 	{
 		//Baja la barra de estamina
-		estaminaActual -= 1;
+		estaminaActual -= 9;
 		//En efecto está dasheando
 		hasDashed = true;
 		

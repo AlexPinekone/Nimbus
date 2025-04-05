@@ -215,19 +215,26 @@ MonoBehaviour:
   slideSpeed: 5
   wallJumpLerp: 10
   dashSpeed: 20
+  regenDelay: 0.2
   canMove: 1
   wallGrab: 0
   wallJumped: 0
   isDashing: 0
   side: 1
-  estaminaMaxima: 3
+  estaminaMaxima: 9
   estaminaActual: 0
   estaminaUI: {fileID: 0}
   spritesEstamina:
-  - {fileID: 839895184, guid: 6021eb05674abc34b953fed3a22da022, type: 3}
-  - {fileID: -1561448248, guid: 48dae10c8c2d78f4aa426488fa4ee2b7, type: 3}
-  - {fileID: 1724190895, guid: 48dae10c8c2d78f4aa426488fa4ee2b7, type: 3}
-  - {fileID: 1022503359, guid: 48dae10c8c2d78f4aa426488fa4ee2b7, type: 3}
+  - {fileID: -130500309, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
+  - {fileID: 538355158, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
+  - {fileID: 1211661601, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
+  - {fileID: 1576915439, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
+  - {fileID: -1893241076, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
+  - {fileID: -1068052988, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
+  - {fileID: -5787428, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
+  - {fileID: 1924789003, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
+  - {fileID: 728871221, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
+  - {fileID: 1367611375, guid: f65ce4ed234b04d46b7bcb5f52185225, type: 3}
 --- !u!114 &3810471916961871514
 MonoBehaviour:
   m_ObjectHideFlags: 0
