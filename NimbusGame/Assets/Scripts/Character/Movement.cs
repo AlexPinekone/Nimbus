@@ -88,7 +88,6 @@ public class Movement : MonoBehaviour
 		
 		isRegen = true;
 		
-		print("VA que va: " + estaminaActual);
 		while(estaminaActual < estaminaMaxima)
 		{
 			yield return new WaitForSeconds(regenDelay);
