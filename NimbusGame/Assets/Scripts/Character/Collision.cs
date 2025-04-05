@@ -53,7 +53,7 @@ public class Collision : MonoBehaviour
 		wallSide = onRightWall ? -1 : 1;   
 	    
 		if(onRightWall==true){
-			print("ok");
+			//print("ok");
 		}
     }
 }
