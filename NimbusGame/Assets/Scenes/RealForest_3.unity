@@ -3338,7 +3338,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5060692047631694681, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4
+      value: -4.49
       objectReference: {fileID: 0}
     - target: {fileID: 5060692047631694681, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3381,9 +3381,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1895179378}
     - target: {fileID: 8246726275915673393, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
+      propertyPath: threshold
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246726275915673393, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
       propertyPath: estaminaUI
       value: 
       objectReference: {fileID: 120977213}
+    - target: {fileID: 8246726275915673393, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
+      propertyPath: respawnPosition.x
+      value: -12.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246726275915673393, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
+      propertyPath: respawnPosition.y
+      value: -4.496
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4217,7 +4229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6299687030705780599, guid: c72550ba071843a4eb30a3d999c125e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -13.02
+      value: -13.51
       objectReference: {fileID: 0}
     - target: {fileID: 6299687030705780599, guid: c72550ba071843a4eb30a3d999c125e5, type: 3}
       propertyPath: m_LocalPosition.z

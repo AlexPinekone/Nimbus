@@ -13,6 +13,10 @@ public class Movement : MonoBehaviour
 	//Para cambiar la animación
 	private Animator animator;
 	
+	[Header("Falling")]
+	public float threshold;
+	public Vector2 respawnPosition;
+	
 	//Lo que dice... Stats
 	[Space]
 	[Header("Stats")]
@@ -82,6 +86,11 @@ public class Movement : MonoBehaviour
 	{
 		//Cambia las variables de la animación, para activar la animación
 		animator.SetFloat("xVelocity", Math.Abs(rb.velocity.x));
+		//Revisar si se cayó al vacio
+		if(transform.position.y < threshold)
+		{
+			transform.position = respawnPosition;
+		}
 	}
 	
 	IEnumerator RecuperaLaEstamina(){

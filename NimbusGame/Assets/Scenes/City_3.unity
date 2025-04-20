@@ -3540,7 +3540,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5060692047631694681, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 42.4
+      value: -12.1
       objectReference: {fileID: 0}
     - target: {fileID: 5060692047631694681, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -3587,9 +3587,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1895179378}
     - target: {fileID: 8246726275915673393, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
+      propertyPath: threshold
+      value: -15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246726275915673393, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
       propertyPath: estaminaUI
       value: 
       objectReference: {fileID: 120977213}
+    - target: {fileID: 8246726275915673393, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
+      propertyPath: respawnPosition.x
+      value: -12.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8246726275915673393, guid: a3ccb10e6e1e1934298114461726568a, type: 3}
+      propertyPath: respawnPosition.y
+      value: -4.45
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4419,7 +4431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6299687030705780599, guid: c72550ba071843a4eb30a3d999c125e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 45.56
+      value: -8.940001
       objectReference: {fileID: 0}
     - target: {fileID: 6299687030705780599, guid: c72550ba071843a4eb30a3d999c125e5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4431,7 +4443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8432856199597060701, guid: c72550ba071843a4eb30a3d999c125e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 45.559986
+      value: -2.610544
       objectReference: {fileID: 0}
     - target: {fileID: 8432856199597060701, guid: c72550ba071843a4eb30a3d999c125e5, type: 3}
       propertyPath: m_LocalPosition.y
