@@ -38,4 +38,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/City_3.unity
     guid: 761e16c47f0a3574586df6134ecfdd90
+  - enabled: 1
+    path: Assets/Scenes/CinematicFinal.unity
+    guid: 3393b9cf93cc65c4db58201b41ad4b66
+  - enabled: 1
+    path: Assets/Scenes/CinematicStart.unity
+    guid: badd0ab514b77214096ed404a5522bd2
   m_configObjects: {}

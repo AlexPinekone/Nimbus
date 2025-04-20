@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using UnityEngine.SceneManagement;
 
-public class CinematicController : MonoBehaviour
+public class CinematicControllerFinal : MonoBehaviour
 {
 	public Image imageDisplay; // la imagen en pantalla
 	public Sprite[] panels;    // imágenes de la cinemática
@@ -41,7 +41,7 @@ public class CinematicController : MonoBehaviour
 		Debug.Log("Cinemática terminada");
 		
 		
-		SceneManager.LoadScene("Forest_1");
+		SceneManager.LoadScene("Creditos");
 		
 	}
 
