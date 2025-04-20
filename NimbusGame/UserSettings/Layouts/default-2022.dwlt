@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 113
+  controlID: 264
   draggingID: 0
 --- !u!114 &6
 MonoBehaviour:
@@ -192,8 +192,8 @@ MonoBehaviour:
     y: 0
     width: 190.4
     height: 500
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 1
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: GridPaintPaletteWindow
+  m_Name: InspectorWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
@@ -281,14 +281,14 @@ MonoBehaviour:
     y: 0
     width: 371.19995
     height: 730.8
-  m_MinSize: {x: 241, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
-  m_ActualView: {fileID: 27}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 26}
   m_Panes:
   - {fileID: 26}
   - {fileID: 27}
-  m_Selected: 1
-  m_LastSelected: 0
+  m_Selected: 0
+  m_LastSelected: 1
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 61
@@ -431,10 +431,10 @@ MonoBehaviour:
     m_Tooltip: "TutorialTrigger.cs \nin Scripts/Game/Tutoria/"
   m_Pos:
     serializedVersion: 2
-    x: 192
+    x: 190.40001
     y: 73.6
-    width: 969.19995
-    height: 480.6
+    width: 972.4
+    height: 479
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -453,8 +453,8 @@ MonoBehaviour:
     scrollPositionOffset: 14
     searchString: 
     caretPosition:
-      virtualColumn: 35
-      column: 35
+      virtualColumn: 31
+      column: 31
       characterIndex: 32
       line: 8
     _selectionStartPosition:
@@ -468,8 +468,8 @@ MonoBehaviour:
       serializedVersion: 2
       x: 44.676926
       y: 32
-      width: 904.523
-      height: 434.6
+      width: 907.7231
+      height: 433
     tokenTooltip: {fileID: 0}
     argumentsHint: {fileID: 0}
 --- !u!114 &15
@@ -570,9 +570,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: fefaffff
+      m_SelectedIDs: 1c790000
+      m_LastClickedID: 31004
+      m_ExpandedIDs: 3c80fffffefaffffca78000008790000167900003079000040790000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -991,9 +991,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -3.3213284, y: 1.9663398, z: 4.054951}
+    m_Target: {x: 15.994354, y: 15.522964, z: -0.18683782}
     speed: 2
-    m_Value: {x: -3.3723924, y: 2.1659534, z: 4.050572}
+    m_Value: {x: 16.009457, y: 15.539989, z: -0.18703943}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1043,9 +1043,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 9.293458
+    m_Target: 26.86114
     speed: 2
-    m_Value: 9.73137
+    m_Value: 26.8813
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -1395,7 +1395,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 79}
     m_SelectedIDs: 70850000
     m_LastClickedID: 34160
-    m_ExpandedIDs: 00000000ae7b000000ca9a3bffffff7f
+    m_ExpandedIDs: 00000000ae7b00007a850000de85000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1450,8 +1450,8 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
-    m_ExpandedInstanceIDs: c6230000406500008e6f0000e06f0000a06e0000bc700000287000004c71000036740000407400003c740000869500006e850000
+    m_HadKeyboardFocusLastEvent: 1
+    m_ExpandedInstanceIDs: c6230000406500008e6f0000e06f0000a06e0000bc700000287000004c71000036740000407400003c740000869500006e8500003e860000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1710,7 +1710,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
+  m_LastVerticalScrollValue: 188.79999
   m_GlobalObjectId: 
   m_InspectorMode: 0
   m_LockTracker:
