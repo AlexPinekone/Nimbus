@@ -29,4 +29,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RealForest_3.unity
     guid: 375f070f922799742a9625943e643985
+  - enabled: 1
+    path: Assets/Scenes/City_1.unity
+    guid: 274cb2a2591f59c4a939567c06cbd478
+  - enabled: 1
+    path: Assets/Scenes/City_2.unity
+    guid: 50c071a485643594cb8e1ed635e5b6ab
+  - enabled: 1
+    path: Assets/Scenes/City_3.unity
+    guid: 761e16c47f0a3574586df6134ecfdd90
   m_configObjects: {}

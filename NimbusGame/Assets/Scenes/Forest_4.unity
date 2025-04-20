@@ -8415,7 +8415,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8432856199597060701, guid: c72550ba071843a4eb30a3d999c125e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.607106
+      value: -2.6105325
       objectReference: {fileID: 0}
     - target: {fileID: 8432856199597060701, guid: c72550ba071843a4eb30a3d999c125e5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8574,7 +8574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextLevelName: RealForest_1
-  DestinationPosition: {x: -12, y: -4}
+  DestinationPosition: {x: -12.36, y: -4.47}
 --- !u!61 &1714277417
 BoxCollider2D:
   m_ObjectHideFlags: 0
