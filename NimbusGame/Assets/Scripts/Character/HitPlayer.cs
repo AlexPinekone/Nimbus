@@ -19,10 +19,10 @@ public class HitPlayer : MonoBehaviour
             print("¡Golpe al enemigo!");
 
             // Aplicar daño al enemigo
-            VidaEnemigo saludEnemigo = enemigo.GetComponent<VidaEnemigo>();
+            HealtEnemi saludEnemigo = enemigo.GetComponent<HealtEnemi>();
             if (saludEnemigo != null)
             {
-                saludEnemigo.RecibirDaño(daño);
+                saludEnemigo.RecibirDaño(daño, transform.position);
             }
         }
     }

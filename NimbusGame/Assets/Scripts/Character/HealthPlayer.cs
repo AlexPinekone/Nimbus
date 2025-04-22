@@ -26,8 +26,9 @@ public class HealthPlayer : MonoBehaviour
 
         if (vidaActual <= 0)
         {
-            print("�Jugador muerto!");
-            // Aqu� podr�as agregar la l�gica de muerte
+            Debug.Log("El jugador murió...");
+
+            
         }
     }
 
