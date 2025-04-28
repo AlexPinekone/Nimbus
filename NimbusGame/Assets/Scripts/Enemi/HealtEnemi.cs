@@ -3,19 +3,24 @@ using UnityEngine;
 public class HealtEnemi : MonoBehaviour
 {
     public int vida = 5; // Vida inicial del enemigo
+    public int vidaActual;
     public float fuerzaRetroceso = 2f;
     public float tiempoRetroceso = 0.3f;
 
     private Rigidbody2D rb;
     private Animator ani;
+    public HitEnemi hitEnemi;
 
     public MovimentE movimiento; // Para enemigos terrestres
     public MovimentEfly movimientoVolador; // Para enemigos voladores
+    public MovimentE Dead; // Para enemigos terrestres
+    public MovimentEfly DeadVol; // Para enemigos voladores
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         ani = GetComponent<Animator>();
+        vidaActual = vida;
 
         // Asignar referencias automáticamente si existen
         movimiento = GetComponent<MovimentE>();
@@ -24,7 +29,7 @@ public class HealtEnemi : MonoBehaviour
 
     public void RecibirDaño(int cantidad, Vector2 origen)
     {
-        vida -= cantidad;
+        vidaActual -= cantidad;
         print("¡El enemigo recibió daño! Vida restante: " + vida);
 
         // Retroceso
@@ -43,9 +48,16 @@ public class HealtEnemi : MonoBehaviour
 
         Invoke(nameof(FinRetroceso), tiempoRetroceso);
 
-        if (vida <= 0)
+        if (vidaActual <= 0)
         {
-            Morir();
+            
+            print("daño desactivado desde HealtEnemi");
+
+            if (movimientoVolador != null)
+                movimientoVolador.Morir();
+
+            if (movimiento != null)
+                movimiento.Morir();
         }
     }
 
@@ -56,10 +68,9 @@ public class HealtEnemi : MonoBehaviour
         else if (movimientoVolador != null)
             movimientoVolador.atacando = false;
     }
-
-    void Morir()
+   
+    public void ResetHealth()
     {
-        print("¡El enemigo ha sido derrotado!");
-        Destroy(gameObject);
+        vidaActual = vida;  // Restaurar la vida
     }
 }

@@ -6,16 +6,23 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
     public Vector2 playerNewPosition;
     public bool changePosition = false;
 
-    void Awake(){
+    // Último checkpoint
+    private Vector2 lastCheckpointPosition;
+    private bool checkpointSet = false;
+
+    void Awake()
+    {
         if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else{
+        else
+        {
             Destroy(gameObject);
         }
     }
@@ -24,7 +31,28 @@ public class GameManager : MonoBehaviour
     {
         playerNewPosition = position;
         changePosition = true;
-        //FindObjectOfType<ScreenFade>().LoadScene(levelName);
         SceneManager.LoadScene(levelName);
+    }
+
+    // Establecer el checkpoint
+    public void SetCheckpoint(Vector2 position)
+    {
+        lastCheckpointPosition = position;
+        checkpointSet = true;
+        Debug.Log("✅ Checkpoint guardado: " + position);
+    }
+
+    // Obtener el checkpoint
+    public Vector2 GetCheckpoint()
+    {
+        if (checkpointSet)
+        {
+            return lastCheckpointPosition;
+        }
+        else
+        {
+            // Si no hay checkpoint, devolver una posición inicial por defecto (0,0)
+            return Vector2.zero;
+        }
     }
 }

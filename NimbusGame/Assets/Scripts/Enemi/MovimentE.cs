@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+
 public class MovimentE : MonoBehaviour
 {
     // Variables de comportamiento y movimiento
@@ -37,6 +38,12 @@ public class MovimentE : MonoBehaviour
     // Variables internas
     private Rigidbody2D rb;
 
+    //posicion inicial
+    private Vector3 posicionInicial;
+    public HealtEnemi healt;
+    public float tiempoParaDestruir = 2f;
+    public bool muerto = false;
+
     void Start()
     {
         ani = GetComponent<Animator>();
@@ -53,19 +60,22 @@ public class MovimentE : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
         // Verificar si el enemigo toca una pared o llega al final de la plataforma
-        wallDetected = Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, obstacleLayer);
+            wallDetected = Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, obstacleLayer);
 
         // Si detecta una pared o no está en el suelo, cambiar de dirección
         if (wallDetected || !isGrounded)
         {
-            ChangeDirection();
+          ChangeDirection();
         }
 
-        // Verificar la posición del jugador
-        DetectarJugador();
+        if (muerto == false)
+        {
+            // Verificar la posición del jugador
+            DetectarJugador();
 
-        // Comportamiento del enemigo
-        Comportamientos();
+            // Comportamiento del enemigo
+            Comportamientos();
+        }
     }
 
     void DetectarJugador()
@@ -189,5 +199,33 @@ public class MovimentE : MonoBehaviour
 
         ani.SetBool("Attack", false);
         atacando = false; // Permitir moverse nuevamente
+    }
+
+    public void Morir()
+    {
+        muerto = true;
+        rb.velocity = Vector2.zero;
+        ani.SetBool("Dead", true);
+        ani.SetBool("Attack", false);
+        ani.SetBool("Walk", false);
+        ani.SetBool("Run", false);
+        this.enabled = false;
+        atacando = false;
+        StartCoroutine(DestruirDespuesDeTiempo());
+    }
+
+    IEnumerator DestruirDespuesDeTiempo()
+    {
+        yield return new WaitForSeconds(tiempoParaDestruir);
+        Destroy(gameObject);
+    }
+
+
+    public void ReiniciarPosicion()
+    {
+        transform.position = posicionInicial; // Reinicia la posición
+        // Si es necesario, también puedes reiniciar otros estados o valores (salud, animaciones, etc.)
+        healt.ResetHealth();
+
     }
 }

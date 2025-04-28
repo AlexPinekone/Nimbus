@@ -17,9 +17,19 @@ public class Range : MonoBehaviour
         if (coll.CompareTag("Player"))
         {
             // Desactivar animaciones de movimiento
-            ani.SetBool("Walk", false);
-            ani.SetBool("Run", false);
-            ani.SetBool("Attack", true);
+            if (enemigo != null)
+            {
+                ani.SetBool("Walk", false);
+                ani.SetBool("Run", false);
+                ani.SetBool("Attack", true);
+            }
+            else if (enemigoVolador != null)
+            {
+                ani.SetBool("Bat-Fly", false);
+                ani.SetBool("Bat-RunFly", false);
+                ani.SetBool("Bat-Atack", true); ;
+            }
+
 
             // Marcar como atacando
             if (enemigo != null)

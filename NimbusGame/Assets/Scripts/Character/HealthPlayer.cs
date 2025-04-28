@@ -28,7 +28,12 @@ public class HealthPlayer : MonoBehaviour
         {
             Debug.Log("El jugador murió...");
 
-            
+            // Mueve al jugador al checkpoint guardado
+            transform.position = GameManager.instance.GetCheckpoint();
+
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            vidaActual = vidaMaxima;
+            ActualizarBarraVida();
         }
     }
 
