@@ -10,7 +10,13 @@ public class HitEnemi : MonoBehaviour
     public float cooldownGolpe = 1.0f;
     private float tiempoUltimoGolpe = 0;
 
-    public int dano = 1;
+    [SerializeField] private MovimentE movimentE;
+    [SerializeField] private MovimentEfly movimentEfly;
+
+    private void Start()
+    {
+        
+    }
 
     void Update()
     {
@@ -29,7 +35,9 @@ public class HitEnemi : MonoBehaviour
                 HealthPlayer saludJugador = jugador.GetComponent<HealthPlayer>();
                 if (saludJugador != null)
                 {
+                    int dano = ObtenerDano();
                     saludJugador.RecibirDano(dano);
+                    print(dano);
                 }
 
                 tiempoUltimoGolpe = Time.time;
@@ -37,7 +45,25 @@ public class HitEnemi : MonoBehaviour
         }
     }
 
-    
+    private int ObtenerDano()
+    {
+        if (movimentE != null)
+        {
+            Debug.Log("Usando damage de MovementE: " + movimentE.dano);
+            return movimentE.dano;
+        }
+        else if (movimentEfly != null)
+        {
+            Debug.Log("Usando damage de MovementEfly: " + movimentEfly.dano);
+            return movimentEfly.dano;
+        }
+        else
+        {
+            Debug.LogWarning("NO HAY MovementE ni MovementEfly encontrados en el enemigo.");
+            return 0;
+        }
+    }
+
     void OnDrawGizmosSelected()
     {
         if (puntoGolpe != null)

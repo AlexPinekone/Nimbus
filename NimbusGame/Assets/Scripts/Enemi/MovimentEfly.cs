@@ -11,7 +11,8 @@ public class MovimentEfly : MonoBehaviour
     public float cronometro;
     public float speed_walk;
     public float speed_run;
-   
+    public int dano = 1;
+
     public float rango_vision;
     public float rango_vision_vertical;
     public float rango_ataque;
@@ -25,12 +26,14 @@ public class MovimentEfly : MonoBehaviour
     public HealtEnemi healt;
     public float tiempoParaDestruir = 2f;
     public bool muerto = false;
+    public bool TocandoSuelo = false;
 
     void Start()
     {
         ani = GetComponent<Animator>();
         target = GameObject.Find("Player");
         rb = GetComponent<Rigidbody2D>();
+        dano = 1;
         posicionInicial = transform.position;
         rb.gravityScale = 0;
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), target.GetComponent<Collider2D>(), true);
@@ -38,7 +41,20 @@ public class MovimentEfly : MonoBehaviour
 
     void Update()
     {
-        if(muerto == false) { 
+        if (muerto && !TocandoSuelo)
+        {
+            
+            rb.gravityScale = 1f;
+
+            // Detectar si tocó el suelo
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.2f, LayerMask.GetMask("Ground"));
+            if (hit.collider != null)
+            {
+                TocandoSuelo = true;
+                StartCoroutine(DestruirDespuesDeTiempo());
+            }
+        }
+        if (muerto == false) { 
             DetectarJugador();
             Comportamientos();
         }
@@ -131,13 +147,8 @@ public class MovimentEfly : MonoBehaviour
     }
     void Move(float speed)
     {
-        Vector2 direccionMovimiento = (target.transform.position - transform.position).normalized;
-        rb.velocity = new Vector2(direccionMovimiento.x * speed, direccionMovimiento.y * speed);
-
-        if (direccionMovimiento.x > 0)
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-        else
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+        Vector2 direction = (target.transform.position - transform.position).normalized;
+        rb.velocity = direction * speed_run;
     }
 
 
@@ -173,12 +184,12 @@ public class MovimentEfly : MonoBehaviour
     public void Morir()
     {
         muerto = true;
+        dano = 0;
         rb.velocity = Vector2.zero;
         ani.SetBool("Bat-Dead", true);
         ani.SetBool("Bat-Atack", false);
         ani.SetBool("Bat-Fly", false);
         ani.SetBool("Bat-RunFly", false);
-        this.enabled = false;
         StartCoroutine(DestruirDespuesDeTiempo());
     }
 

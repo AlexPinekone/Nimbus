@@ -13,6 +13,7 @@ public class MovimentE : MonoBehaviour
     public float speed_run;
     public GameObject target;
     public bool atacando;
+    public int dano = 1;
 
     // Variables de detección del jugador
     public float rango_vision;
@@ -49,6 +50,7 @@ public class MovimentE : MonoBehaviour
         ani = GetComponent<Animator>();
         target = GameObject.Find("Player");
         rb = GetComponent<Rigidbody2D>();
+        dano = 1;
 
         // Ignorar colisiones entre el enemigo y el jugador
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), target.GetComponent<Collider2D>(), true);
@@ -204,6 +206,7 @@ public class MovimentE : MonoBehaviour
     public void Morir()
     {
         muerto = true;
+        dano = 0;
         rb.velocity = Vector2.zero;
         ani.SetBool("Dead", true);
         ani.SetBool("Attack", false);
