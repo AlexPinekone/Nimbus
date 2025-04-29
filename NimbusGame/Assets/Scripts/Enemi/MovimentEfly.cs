@@ -1,49 +1,32 @@
 using System.Collections;
 using UnityEngine;
 
-
-public class MovimentE : MonoBehaviour
+public class MovimentEfly : MonoBehaviour
 {
-    // Variables de comportamiento y movimiento
-    public int rutina;
-    public float cronometro;
     public Animator ani;
-    public int direccion;
-    public float speed_walk;
-    public float speed_run;
     public GameObject target;
     public bool atacando;
+    public int direccion;
+    public int rutina;
+    public float cronometro;
+    public float speed_walk;
+    public float speed_run;
     public int dano = 1;
 
-    // Variables de detección del jugador
     public float rango_vision;
     public float rango_vision_vertical;
     public float rango_ataque;
-
-    // Variables de detección de colisiones
-    public Transform groundCheck;
-    public float groundCheckRadius = 0.2f;
-    public LayerMask groundLayer;
-    private bool isGrounded;
-
-    public Transform wallCheck;
-    public float wallCheckRadius = 0.2f;
-    public LayerMask obstacleLayer;
-    private bool wallDetected;
-
-    // Variables de ataque
-    public float cooldownGolpe = 1.0f; // Tiempo de espera entre golpes
-    private float tiempoUltimoGolpe = 0; // Tiempo del último golpe
+    
+    public float cooldownGolpe = 1.0f;
+    private float tiempoUltimoGolpe = 0;
     public HitEnemi hitScript;
 
-    // Variables internas
     private Rigidbody2D rb;
-
-    //posicion inicial
     private Vector3 posicionInicial;
     public HealtEnemi healt;
     public float tiempoParaDestruir = 2f;
     public bool muerto = false;
+    public bool TocandoSuelo = false;
 
     void Start()
     {
@@ -51,31 +34,28 @@ public class MovimentE : MonoBehaviour
         target = GameObject.Find("Player");
         rb = GetComponent<Rigidbody2D>();
         dano = 1;
-
-        // Ignorar colisiones entre el enemigo y el jugador
+        posicionInicial = transform.position;
+        rb.gravityScale = 0;
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), target.GetComponent<Collider2D>(), true);
     }
 
     void Update()
     {
-        // Verificar si el enemigo está en el suelo
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-
-        // Verificar si el enemigo toca una pared o llega al final de la plataforma
-            wallDetected = Physics2D.OverlapCircle(wallCheck.position, wallCheckRadius, obstacleLayer);
-
-        // Si detecta una pared o no está en el suelo, cambiar de dirección
-        if (wallDetected || !isGrounded)
+        if (muerto && !TocandoSuelo)
         {
-          ChangeDirection();
+            
+            rb.gravityScale = 1f;
+
+            // Detectar si tocó el suelo
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.2f, LayerMask.GetMask("Ground"));
+            if (hit.collider != null)
+            {
+                TocandoSuelo = true;
+                StartCoroutine(DestruirDespuesDeTiempo());
+            }
         }
-
-        if (muerto == false)
-        {
-            // Verificar la posición del jugador
+        if (muerto == false) { 
             DetectarJugador();
-
-            // Comportamiento del enemigo
             Comportamientos();
         }
     }
@@ -103,36 +83,33 @@ public class MovimentE : MonoBehaviour
 
         if (!atacando)
         {
-            // Si el jugador está dentro del rango de visión horizontal y vertical
             if (distanciaX < rango_vision && distanciaY < rango_vision_vertical)
             {
-                // Si el jugador está dentro del rango de ataque
-                if (distanciaX < rango_ataque)
+                if (distanciaX < rango_ataque || distanciaY < rango_ataque)
                 {
-                    // Verificar si ha pasado el tiempo de cooldown
                     if (Time.time >= tiempoUltimoGolpe + cooldownGolpe)
                     {
-                        StartCoroutine(IniciarAtaque());
+                            StartCoroutine(IniciarAtaque());
                     }
                     else
                     {
-                        // Si está en cooldown, volver al estado idle
-                        ani.SetBool("Attack", false);
-                        ani.SetBool("Walk", false);
-                        ani.SetBool("Run", false);
+                        ani.SetBool("Bat-Atack", false);
+                        ani.SetBool("Bat-Fly", false);
+                        ani.SetBool("Bat-RunFly", false);
                     }
                 }
-                else // Si el jugador está fuera del rango de ataque pero dentro del rango de visión
+                else
                 {
-                    ani.SetBool("Walk", false);
-                    ani.SetBool("Run", true);
+                    ani.SetBool("Bat-Fly", false);
+                    ani.SetBool("Bat-RunFly", true);
                     Move(speed_run);
-                    ani.SetBool("Attack", false);
+                    ani.SetBool("Bat-Atack", false);
+
                 }
             }
-            else // Si el jugador está fuera del rango de visión
+            else
             {
-                ani.SetBool("Run", false);
+                ani.SetBool("Bat-RunFly", false);
                 cronometro += Time.deltaTime;
                 if (cronometro >= 4)
                 {
@@ -142,41 +119,42 @@ public class MovimentE : MonoBehaviour
                 switch (rutina)
                 {
                     case 0:
-                        ani.SetBool("Walk", false);
-                        rb.velocity = new Vector2(0, rb.velocity.y); // Detenerse
+                        ani.SetBool("Bat-Fly", false);
+                        rb.velocity = new Vector2(0, rb.velocity.y);
                         break;
                     case 1:
                         direccion = Random.Range(0, 2);
                         rutina++;
                         break;
                     case 2:
-                        Move(speed_walk);
-                        ani.SetBool("Walk", true);
+                        MoveRut(speed_walk);
+                        ani.SetBool("Bat-Fly", true);
                         break;
                 }
             }
         }
     }
 
-    void Move(float speed)
+    void MoveRut(float speed)
     {
-        float moveDirection = (direccion == 0) ? 1 : -1; // Determina la dirección
+        float moveDirection = (direccion == 0) ? 1 : -1;
         rb.velocity = new Vector2(moveDirection * speed, rb.velocity.y);
 
-        // Cambiar la dirección del sprite
         if (moveDirection > 0)
-        {
-            transform.rotation = Quaternion.Euler(0, 0, 0); // Mirar a la derecha
-        }
-        else if (moveDirection < 0)
-        {
-            transform.rotation = Quaternion.Euler(0, 180, 0); // Mirar a la izquierda
-        }
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        else
+            transform.rotation = Quaternion.Euler(0, 180, 0);
     }
+    void Move(float speed)
+    {
+        Vector2 direction = (target.transform.position - transform.position).normalized;
+        rb.velocity = direction * speed_run;
+    }
+
+
 
     void ChangeDirection()
     {
-        // Cambiar dirección
         direccion = (direccion == 0) ? 1 : 0;
     }
 
@@ -184,9 +162,9 @@ public class MovimentE : MonoBehaviour
     {
         atacando = true; // Bloquear movimiento mientras ataca
         rb.velocity = Vector2.zero; // Detener movimiento
-        ani.SetBool("Attack", true);
-        ani.SetBool("Walk", false);
-        ani.SetBool("Run", false);
+        ani.SetBool("Bat-Atack", true);
+        ani.SetBool("Bat-Fly", false);
+        ani.SetBool("Bat-RunFly", false);
 
         yield return new WaitForSeconds(0.0f); // Delay antes de golpear
 
@@ -199,7 +177,7 @@ public class MovimentE : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f); // Delay después de golpear
 
-        ani.SetBool("Attack", false);
+        ani.SetBool("Bat-Atack", false);
         atacando = false; // Permitir moverse nuevamente
     }
 
@@ -208,12 +186,10 @@ public class MovimentE : MonoBehaviour
         muerto = true;
         dano = 0;
         rb.velocity = Vector2.zero;
-        ani.SetBool("Dead", true);
-        ani.SetBool("Attack", false);
-        ani.SetBool("Walk", false);
-        ani.SetBool("Run", false);
-        this.enabled = false;
-        atacando = false;
+        ani.SetBool("Bat-Dead", true);
+        ani.SetBool("Bat-Atack", false);
+        ani.SetBool("Bat-Fly", false);
+        ani.SetBool("Bat-RunFly", false);
         StartCoroutine(DestruirDespuesDeTiempo());
     }
 
@@ -223,12 +199,9 @@ public class MovimentE : MonoBehaviour
         Destroy(gameObject);
     }
 
-
     public void ReiniciarPosicion()
     {
-        transform.position = posicionInicial; // Reinicia la posición
-        // Si es necesario, también puedes reiniciar otros estados o valores (salud, animaciones, etc.)
+        transform.position = posicionInicial;
         healt.ResetHealth();
-
     }
 }

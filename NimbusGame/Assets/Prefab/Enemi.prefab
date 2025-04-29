@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 801320827850242062}
   - component: {fileID: 7198980589561258703}
   - component: {fileID: 3220182901544475673}
-  - component: {fileID: 8806419828455983359}
   - component: {fileID: 6743814847920267488}
   - component: {fileID: 8517028403122961084}
   - component: {fileID: 49811619552515375}
@@ -146,41 +145,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &8806419828455983359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4249383976147341885}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72936c466922a20498fdec5244274ecd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rutina: 0
-  cronometro: 0
-  ani: {fileID: 0}
-  direccion: 0
-  speed_walk: 1.5
-  speed_run: 3
-  target: {fileID: 0}
-  atacando: 0
-  rango_vision: 5
-  rango_vision_vertical: 2
-  rango_ataque: 1.3
-  groundCheck: {fileID: 3090809119111152371}
-  groundCheckRadius: 0.2
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  wallCheck: {fileID: 5858617929870594615}
-  wallCheckRadius: 0.2
-  obstacleLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  cooldownGolpe: 1
-  hitScript: {fileID: 7228894821603954022}
 --- !u!50 &6743814847920267488
 Rigidbody2D:
   serializedVersion: 4
@@ -266,6 +230,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vida: 5
+  vidaActual: 0
+  fuerzaRetroceso: 2
+  tiempoRetroceso: 0.3
+  movimiento: {fileID: 0}
+  movimientoVolador: {fileID: 0}
 --- !u!1 &5169719421900550029
 GameObject:
   m_ObjectHideFlags: 0
@@ -357,7 +326,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ani: {fileID: 3220182901544475673}
-  enemigo: {fileID: 8806419828455983359}
+  enemigo: {fileID: 0}
+  enemigoVolador: {fileID: 0}
 --- !u!1 &6796817681351795354
 GameObject:
   m_ObjectHideFlags: 0

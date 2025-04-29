@@ -9,32 +9,55 @@ public class Range : MonoBehaviour
 
     // Referencia al script de movimiento del enemigo (MovimentE)
     public MovimentE enemigo;
+    public MovimentEfly enemigoVolador;
 
     /// Método que se ejecuta cuando un objeto entra en el trigger del collider 2D.
     void OnTriggerEnter2D(Collider2D coll)
     {
-        // Verificar si el objeto que entra en el trigger tiene el tag "Player"
         if (coll.CompareTag("Player"))
         {
-            // Desactivar las animaciones de caminar y correr
-            ani.SetBool("Walk", false);
-            ani.SetBool("Run", false);
+            // Desactivar animaciones de movimiento
+            if (enemigo != null)
+            {
+                ani.SetBool("Walk", false);
+                ani.SetBool("Run", false);
+                ani.SetBool("Attack", true);
+            }
+            else if (enemigoVolador != null)
+            {
+                ani.SetBool("Bat-Fly", false);
+                ani.SetBool("Bat-RunFly", false);
+                ani.SetBool("Bat-Atack", true); ;
+            }
 
-            // Activar la animación de ataque
-            ani.SetBool("Attack", true);
 
-            // Indicar que el enemigo está atacando
-            enemigo.atacando = true;
+            // Marcar como atacando
+            if (enemigo != null)
+            {
+                enemigo.atacando = true;
+            }
+            else if (enemigoVolador != null)
+            {
+                enemigoVolador.atacando = true;
+            }
 
-            // Desactivar el collider para evitar múltiples detecciones
+            // Desactivar el trigger temporalmente para evitar múltiples ataques
             GetComponent<BoxCollider2D>().enabled = false;
+
+            // Si deseas aplicar daño al jugador, hazlo aquí
+            HealtEnemi vida = coll.GetComponent<HealtEnemi>();
+            if (vida != null)
+            {
+                vida.RecibirDaño(1, transform.position);
+            }
         }
     }
 
     // Start is called before the first frame update
     void Start()
     {
-       
+        enemigo = GetComponentInParent<MovimentE>();
+        enemigoVolador = GetComponentInParent<MovimentEfly>();
     }
 
     // Update is called once per frame
