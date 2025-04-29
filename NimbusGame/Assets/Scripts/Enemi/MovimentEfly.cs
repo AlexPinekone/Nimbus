@@ -16,7 +16,7 @@ public class MovimentEfly : MonoBehaviour
     public float rango_vision;
     public float rango_vision_vertical;
     public float rango_ataque;
-    
+
     public float cooldownGolpe = 1.0f;
     private float tiempoUltimoGolpe = 0;
     public HitEnemi hitScript;
@@ -43,10 +43,7 @@ public class MovimentEfly : MonoBehaviour
     {
         if (muerto && !TocandoSuelo)
         {
-            
             rb.gravityScale = 1f;
-
-            // Detectar si tocó el suelo
             RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 0.2f, LayerMask.GetMask("Ground"));
             if (hit.collider != null)
             {
@@ -54,73 +51,33 @@ public class MovimentEfly : MonoBehaviour
                 StartCoroutine(DestruirDespuesDeTiempo());
             }
         }
-        if (muerto == false) { 
-            DetectarJugador();
-            Comportamientos();
-        }
-    }
 
-    void DetectarJugador()
-    {
-        float distanciaX = transform.position.x - target.transform.position.x;
-        float distanciaY = transform.position.y - target.transform.position.y;
-
-        // Verificar si el jugador está dentro del rango de visión en ambos ejes
-        if (Mathf.Abs(distanciaX) < rango_vision && Mathf.Abs(distanciaY) < rango_vision_vertical)
+        if (!muerto)
         {
-            // Si el jugador está detrás, girar hacia él
-            if ((distanciaX > 0 && direccion == 0) || (distanciaX < 0 && direccion == 1))
+            if (DetectarJugador())
             {
-                ChangeDirection();
-            }
-        }
-    }
-
-    public void Comportamientos()
-    {
-        float distanciaX = Mathf.Abs(transform.position.x - target.transform.position.x);
-        float distanciaY = Mathf.Abs(transform.position.y - target.transform.position.y);
-
-        if (!atacando)
-        {
-            if (distanciaX < rango_vision && distanciaY < rango_vision_vertical)
-            {
-                if (distanciaX < rango_ataque || distanciaY < rango_ataque)
-                {
-                    if (Time.time >= tiempoUltimoGolpe + cooldownGolpe)
-                    {
-                            StartCoroutine(IniciarAtaque());
-                    }
-                    else
-                    {
-                        ani.SetBool("Bat-Atack", false);
-                        ani.SetBool("Bat-Fly", false);
-                        ani.SetBool("Bat-RunFly", false);
-                    }
-                }
-                else
-                {
-                    ani.SetBool("Bat-Fly", false);
-                    ani.SetBool("Bat-RunFly", true);
-                    Move(speed_run);
-                    ani.SetBool("Bat-Atack", false);
-
-                }
+                Comportamientos();
             }
             else
             {
+                // Si no está en rango, cancelar animaciones de ataque o persecución
                 ani.SetBool("Bat-RunFly", false);
+                ani.SetBool("Bat-Atack", false);
+                ani.SetBool("Bat-Fly", false);
+
+                // Patrulla por defecto
                 cronometro += Time.deltaTime;
                 if (cronometro >= 4)
                 {
                     rutina = Random.Range(0, 2);
                     cronometro = 0;
                 }
+
                 switch (rutina)
                 {
                     case 0:
-                        ani.SetBool("Bat-Fly", false);
                         rb.velocity = new Vector2(0, rb.velocity.y);
+                        ani.SetBool("Bat-Fly", false);
                         break;
                     case 1:
                         direccion = Random.Range(0, 2);
@@ -135,6 +92,53 @@ public class MovimentEfly : MonoBehaviour
         }
     }
 
+    bool DetectarJugador()
+    {
+        float distanciaX = transform.position.x - target.transform.position.x;
+        float distanciaY = transform.position.y - target.transform.position.y;
+
+        if (Mathf.Abs(distanciaX) < rango_vision && Mathf.Abs(distanciaY) < rango_vision_vertical)
+        {
+            if ((distanciaX > 0 && direccion == 0) || (distanciaX < 0 && direccion == 1))
+            {
+                ChangeDirection();
+            }
+            return true;
+        }
+
+        return false;
+    }
+
+    void Comportamientos()
+    {
+        float distanciaX = Mathf.Abs(transform.position.x - target.transform.position.x);
+        float distanciaY = Mathf.Abs(transform.position.y - target.transform.position.y);
+
+        if (!atacando)
+        {
+            if (distanciaX < rango_ataque && distanciaY < rango_ataque)
+            {
+                if (Time.time >= tiempoUltimoGolpe + cooldownGolpe)
+                {
+                    StartCoroutine(IniciarAtaque());
+                }
+                else
+                {
+                    ani.SetBool("Bat-Atack", false);
+                    ani.SetBool("Bat-Fly", false);
+                    ani.SetBool("Bat-RunFly", false);
+                }
+            }
+            else
+            {
+                ani.SetBool("Bat-Fly", false);
+                ani.SetBool("Bat-RunFly", true);
+                Move(speed_run);
+                ani.SetBool("Bat-Atack", false);
+            }
+        }
+    }
+
     void MoveRut(float speed)
     {
         float moveDirection = (direccion == 0) ? 1 : -1;
@@ -145,13 +149,18 @@ public class MovimentEfly : MonoBehaviour
         else
             transform.rotation = Quaternion.Euler(0, 180, 0);
     }
+
     void Move(float speed)
     {
         Vector2 direction = (target.transform.position - transform.position).normalized;
         rb.velocity = direction * speed_run;
+
+        // Rotar hacia el jugador
+        if (direction.x > 0)
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        else
+            transform.rotation = Quaternion.Euler(0, 180, 0);
     }
-
-
 
     void ChangeDirection()
     {
@@ -160,25 +169,24 @@ public class MovimentEfly : MonoBehaviour
 
     IEnumerator IniciarAtaque()
     {
-        atacando = true; // Bloquear movimiento mientras ataca
-        rb.velocity = Vector2.zero; // Detener movimiento
+        atacando = true;
+        rb.velocity = Vector2.zero;
         ani.SetBool("Bat-Atack", true);
         ani.SetBool("Bat-Fly", false);
         ani.SetBool("Bat-RunFly", false);
 
-        yield return new WaitForSeconds(0.0f); // Delay antes de golpear
+        yield return new WaitForSeconds(0.0f);
 
-        // Verificar si ha pasado el tiempo de cooldown desde el último golpe
         if (Time.time >= tiempoUltimoGolpe + cooldownGolpe)
         {
-            hitScript?.DetectarGolpe(); // Ejecutar el golpe
-            tiempoUltimoGolpe = Time.time; // Registrar el momento del último golpe
+            hitScript?.DetectarGolpe();
+            tiempoUltimoGolpe = Time.time;
         }
 
-        yield return new WaitForSeconds(0.5f); // Delay después de golpear
+        yield return new WaitForSeconds(0.5f);
 
         ani.SetBool("Bat-Atack", false);
-        atacando = false; // Permitir moverse nuevamente
+        atacando = false;
     }
 
     public void Morir()
