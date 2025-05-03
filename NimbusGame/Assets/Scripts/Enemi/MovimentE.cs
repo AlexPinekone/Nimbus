@@ -40,7 +40,7 @@ public class MovimentE : MonoBehaviour
     private Rigidbody2D rb;
 
     //posicion inicial
-    private Vector3 posicionInicial;
+    //private Vector3 posicionInicial;
     public HealtEnemi healt;
     public float tiempoParaDestruir = 2f;
     public bool muerto = false;
@@ -226,8 +226,7 @@ public class MovimentE : MonoBehaviour
 
     public void ReiniciarPosicion()
     {
-        transform.position = posicionInicial; // Reinicia la posición
-        // Si es necesario, también puedes reiniciar otros estados o valores (salud, animaciones, etc.)
+        //transform.position = posicionInicial; // Reinicia la posición
         healt.ResetHealth();
 
     }
