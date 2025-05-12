@@ -211,7 +211,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 737ab2b6afde7684f811d18cdeb13cc8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e21e3de8188c3cd45bfb4118805f06cf, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -260,12 +260,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   imageDisplay: {fileID: 473840712}
   panels:
-  - {fileID: 21300000, guid: 737ab2b6afde7684f811d18cdeb13cc8, type: 3}
-  - {fileID: 21300000, guid: f57dcfbda1e66b747933f2735b2fcf23, type: 3}
-  - {fileID: 21300000, guid: c92795b5ae6604c4e8d65f7dc286ba33, type: 3}
-  - {fileID: 21300000, guid: b81c670cb09ca1b4c9fb7db7ff6264d5, type: 3}
-  - {fileID: 21300000, guid: 4b106c64bf7125c43b12537e3998f7c2, type: 3}
-  - {fileID: 21300000, guid: 5bde6a3b47dea3a41ad32cc10b12a039, type: 3}
+  - {fileID: 21300000, guid: e21e3de8188c3cd45bfb4118805f06cf, type: 3}
+  - {fileID: 21300000, guid: d36c33e1f16efd240ac568742a478a4e, type: 3}
+  - {fileID: 21300000, guid: 5757b43c83159d2498abe62b07eca954, type: 3}
+  - {fileID: 21300000, guid: cc3486ac2770e294a8a7dde032724d40, type: 3}
+  - {fileID: 21300000, guid: d666d6cae569088478b6d8608d73375a, type: 3}
+  - {fileID: 21300000, guid: 4a57dde445b8c744aab7d8805a430f03, type: 3}
   sounds:
   - {fileID: 8300000, guid: 7ac2160bfc99a9f4cae50305ce2797da, type: 3}
   audioSource: {fileID: 961895186}
