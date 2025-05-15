@@ -238,7 +238,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 483583633}
-  - component: {fileID: 483583632}
+  - component: {fileID: 483583634}
   m_Layer: 0
   m_Name: CinematicManager
   m_TagString: Untagged
@@ -246,31 +246,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &483583632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 483583631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be9ba8bd9ed60924290ffe34da1360a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  imageDisplay: {fileID: 473840712}
-  panels:
-  - {fileID: 21300000, guid: e21e3de8188c3cd45bfb4118805f06cf, type: 3}
-  - {fileID: 21300000, guid: d36c33e1f16efd240ac568742a478a4e, type: 3}
-  - {fileID: 21300000, guid: 5757b43c83159d2498abe62b07eca954, type: 3}
-  - {fileID: 21300000, guid: cc3486ac2770e294a8a7dde032724d40, type: 3}
-  - {fileID: 21300000, guid: d666d6cae569088478b6d8608d73375a, type: 3}
-  - {fileID: 21300000, guid: 4a57dde445b8c744aab7d8805a430f03, type: 3}
-  sounds:
-  - {fileID: 8300000, guid: 7ac2160bfc99a9f4cae50305ce2797da, type: 3}
-  audioSource: {fileID: 961895186}
-  fadeDuration: 1
-  displayTime: 3
 --- !u!4 &483583633
 Transform:
   m_ObjectHideFlags: 0
@@ -286,6 +261,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &483583634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 483583631}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db6e4e209d707824a80341fe6d5bae1c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageDisplay: {fileID: 473840712}
+  panels:
+  - {fileID: 21300000, guid: e21e3de8188c3cd45bfb4118805f06cf, type: 3}
+  - {fileID: 21300000, guid: d36c33e1f16efd240ac568742a478a4e, type: 3}
+  - {fileID: 21300000, guid: 5757b43c83159d2498abe62b07eca954, type: 3}
+  - {fileID: 21300000, guid: cc3486ac2770e294a8a7dde032724d40, type: 3}
+  - {fileID: 21300000, guid: d666d6cae569088478b6d8608d73375a, type: 3}
+  - {fileID: 21300000, guid: 4a57dde445b8c744aab7d8805a430f03, type: 3}
+  sounds:
+  - {fileID: 8300000, guid: 3eca8b9678531cf40aa812dd2989197f, type: 3}
+  - {fileID: 8300000, guid: 8626051653e3a54449cb971dda024af2, type: 3}
+  - {fileID: 8300000, guid: 7e55110b2c8611f4585e79d197dc07e2, type: 3}
+  - {fileID: 8300000, guid: bc3cc40d41851d147abe972cd7e1b3df, type: 3}
+  - {fileID: 8300000, guid: 96820fe6f864d71419f1d86a947f2aa5, type: 3}
+  - {fileID: 8300000, guid: 96820fe6f864d71419f1d86a947f2aa5, type: 3}
+  audioSource: {fileID: 961895186}
+  fadeDuration: 1
+  displayTime: 3
 --- !u!1 &903407388
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,6 +302,7 @@ GameObject:
   - component: {fileID: 903407391}
   - component: {fileID: 903407389}
   - component: {fileID: 903407390}
+  - component: {fileID: 903407392}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -378,6 +384,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &903407392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 903407388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &961895184
 GameObject:
   m_ObjectHideFlags: 0

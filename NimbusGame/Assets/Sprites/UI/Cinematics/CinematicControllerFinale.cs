@@ -41,7 +41,7 @@ public class CinematicControllerFinal : MonoBehaviour
 		Debug.Log("Cinemática terminada");
 		
 		
-		SceneManager.LoadScene("Creditos");
+		SceneManager.LoadScene("Menu");
 		
 	}
 
