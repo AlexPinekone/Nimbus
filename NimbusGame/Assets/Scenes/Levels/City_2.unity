@@ -3751,6 +3751,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1178920167}
     - target: {fileID: 49811619552515375, guid: 54fd7f30497e460418567cd50ab1e8c5, type: 3}
+      propertyPath: vida
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 49811619552515375, guid: 54fd7f30497e460418567cd50ab1e8c5, type: 3}
       propertyPath: hitEnemi
       value: 
       objectReference: {fileID: 1178920162}
@@ -4377,7 +4381,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8432856199597060701, guid: c72550ba071843a4eb30a3d999c125e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.61506724
+      value: -2.6073973
       objectReference: {fileID: 0}
     - target: {fileID: 8432856199597060701, guid: c72550ba071843a4eb30a3d999c125e5, type: 3}
       propertyPath: m_LocalPosition.y

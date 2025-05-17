@@ -2951,6 +2951,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 584698507}
     - target: {fileID: 49811619552515375, guid: 54fd7f30497e460418567cd50ab1e8c5, type: 3}
+      propertyPath: vida
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 49811619552515375, guid: 54fd7f30497e460418567cd50ab1e8c5, type: 3}
       propertyPath: hitEnemi
       value: 
       objectReference: {fileID: 584698502}
@@ -3431,6 +3435,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 817488260}
     - target: {fileID: 49811619552515375, guid: 54fd7f30497e460418567cd50ab1e8c5, type: 3}
+      propertyPath: vida
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 49811619552515375, guid: 54fd7f30497e460418567cd50ab1e8c5, type: 3}
       propertyPath: hitEnemi
       value: 
       objectReference: {fileID: 817488255}
@@ -3781,6 +3789,10 @@ PrefabInstance:
       propertyPath: Dead
       value: 
       objectReference: {fileID: 1116157517}
+    - target: {fileID: 49811619552515375, guid: 54fd7f30497e460418567cd50ab1e8c5, type: 3}
+      propertyPath: vida
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 49811619552515375, guid: 54fd7f30497e460418567cd50ab1e8c5, type: 3}
       propertyPath: hitEnemi
       value: 
@@ -4542,6 +4554,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1561623129}
     - target: {fileID: 49811619552515375, guid: 54fd7f30497e460418567cd50ab1e8c5, type: 3}
+      propertyPath: vida
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 49811619552515375, guid: 54fd7f30497e460418567cd50ab1e8c5, type: 3}
       propertyPath: hitEnemi
       value: 
       objectReference: {fileID: 1561623124}
@@ -4714,6 +4730,10 @@ PrefabInstance:
       propertyPath: Dead
       value: 
       objectReference: {fileID: 1680152029}
+    - target: {fileID: 49811619552515375, guid: 54fd7f30497e460418567cd50ab1e8c5, type: 3}
+      propertyPath: vida
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 49811619552515375, guid: 54fd7f30497e460418567cd50ab1e8c5, type: 3}
       propertyPath: hitEnemi
       value: 
@@ -4909,7 +4929,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8432856199597060701, guid: c72550ba071843a4eb30a3d999c125e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.61507297
+      value: -2.607384
       objectReference: {fileID: 0}
     - target: {fileID: 8432856199597060701, guid: c72550ba071843a4eb30a3d999c125e5, type: 3}
       propertyPath: m_LocalPosition.y

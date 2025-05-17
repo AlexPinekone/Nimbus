@@ -205,6 +205,9 @@ public class MovimentE : MonoBehaviour
 
     public void Morir()
     {
+        Destroy(gameObject);
+        /*
+
         muerto = true;
         dano = 0;
         rb.velocity = Vector2.zero;
@@ -215,13 +218,14 @@ public class MovimentE : MonoBehaviour
         this.enabled = false;
         atacando = false;
         StartCoroutine(DestruirDespuesDeTiempo());
+        */
     }
 
-    IEnumerator DestruirDespuesDeTiempo()
+    /*IEnumerator DestruirDespuesDeTiempo()
     {
         yield return new WaitForSeconds(tiempoParaDestruir);
         Destroy(gameObject);
-    }
+    }*/
 
 
     public void ReiniciarPosicion()

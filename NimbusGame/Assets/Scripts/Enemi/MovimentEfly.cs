@@ -48,7 +48,6 @@ public class MovimentEfly : MonoBehaviour
             if (hit.collider != null)
             {
                 TocandoSuelo = true;
-                StartCoroutine(DestruirDespuesDeTiempo());
             }
         }
 
@@ -191,6 +190,8 @@ public class MovimentEfly : MonoBehaviour
 
     public void Morir()
     {
+        Destroy(gameObject);
+        /*
         muerto = true;
         dano = 0;
         rb.velocity = Vector2.zero;
@@ -199,13 +200,14 @@ public class MovimentEfly : MonoBehaviour
         ani.SetBool("Bat-Fly", false);
         ani.SetBool("Bat-RunFly", false);
         StartCoroutine(DestruirDespuesDeTiempo());
+        */
     }
 
-    IEnumerator DestruirDespuesDeTiempo()
+    /*IEnumerator DestruirDespuesDeTiempo()
     {
         yield return new WaitForSeconds(tiempoParaDestruir);
         Destroy(gameObject);
-    }
+    }*/
 
     public void ReiniciarPosicion()
     {

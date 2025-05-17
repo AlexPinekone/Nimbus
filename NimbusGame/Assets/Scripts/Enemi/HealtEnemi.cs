@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class HealtEnemi : MonoBehaviour
 {
-    public int vida = 5; // Vida inicial del enemigo
+    public int vida = 1; // Vida inicial del enemigo
     public int vidaActual;
     public float fuerzaRetroceso = 2f;
     public float tiempoRetroceso = 0.3f;
