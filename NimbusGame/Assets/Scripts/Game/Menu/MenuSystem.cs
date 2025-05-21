@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 public class MenuSystem : MonoBehaviour
 {
     public GameObject optionsPanel;
-    public GameObject creditsPanel;
+	public GameObject creditsPanel;
 
     public void PlayGame()
     {
-        // Cargar la pantalla de selección de partida
+        // Cargar la pantalla de selecciï¿½n de partida
         SceneManager.LoadScene("CinematicStart");
     }
 
@@ -22,15 +22,24 @@ public class MenuSystem : MonoBehaviour
 
     public void OpenCredits()
     {
-        creditsPanel.SetActive(true);
-        optionsPanel.SetActive(false);
+	    //creditsPanel.SetActive(true);
+	    //optionsPanel.SetActive(false);
+	    SceneManager.LoadScene("Credits");
     }
 
     public void ClosePanels()
     {
-        optionsPanel.SetActive(false);
-        creditsPanel.SetActive(false);
+	    //optionsPanel.SetActive(false);
+	    //creditsPanel.SetActive(false);
+	    SceneManager.LoadScene("Menu");
     }
+    
+	public void ReturnMenu(string nombreE)
+	{
+		//optionsPanel.SetActive(false);
+		//creditsPanel.SetActive(false);
+		SceneManager.LoadScene(nombreE);
+	}
 
     public void ExitGame()
     {

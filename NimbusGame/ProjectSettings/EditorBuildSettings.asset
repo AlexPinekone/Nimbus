@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Menu/Menu.unity
+    guid: 1bef29b35fea58247850be12a2cf9974
   - enabled: 1
     path: Assets/Scenes/Levels/Forest_1.unity
     guid: d35f8e6516cf3b6429742ecbe0d76b41
@@ -45,6 +48,6 @@ EditorBuildSettings:
     path: Assets/Scenes/CinematicS/CinematicStart.unity
     guid: badd0ab514b77214096ed404a5522bd2
   - enabled: 1
-    path: Assets/Scenes/Menu/Menu.unity
-    guid: 1bef29b35fea58247850be12a2cf9974
+    path: Assets/Scenes/Menu/Credits.unity
+    guid: 2fa036771752fb64b961ad2b3b6cbb8e
   m_configObjects: {}
