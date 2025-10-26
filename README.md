@@ -48,13 +48,16 @@ Across **3 zones** and **9 total levels**, you'll jump, climb, and dash through 
 
 ## Screenshots
 
-### Gameplay
+### Cutscene
+![Cutscene](./images/cutscene_1.png)
+
+### Gameplay 1
 ![Gameplay Screenshot 1](./images/screenshot_1.png)
 
-### Cutscene
+### Gameplay 2
 ![Gameplay Screenshot 2](./images/screenshot_2.png)
 
-### Level Preview
+### Gameplay 3
 ![Gameplay Screenshot 3](./images/screenshot_3.png)
 
 ---
