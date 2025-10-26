@@ -74,7 +74,7 @@ Across **3 zones** and **9 total levels**, you'll jump, climb, and dash through 
 
 ## Play the Game
 
-You can play **Nimbus** directly on itch.io:
+You can download **Nimbus** directly on itch.io:
 
 **[Play on Itch.io](https://alexpinekone.itch.io/nimbus)**
 
@@ -101,10 +101,10 @@ During development, I focused on:
 
 ## Developer
 
-Created by **[AlexPinekone]**  
+Created by **AlexPinekone**  
 Artist • Programmer • Level Designer
 
-With the help of **[Miguel Tristan]**
+With the help of **Miguel Tristan**
 
 Itch.io: [alexpinekone.itch.io](https://alexpinekone.itch.io/)
 
@@ -113,6 +113,6 @@ Itch.io: [alexpinekone.itch.io](https://alexpinekone.itch.io/)
 ## 📜 License
 
 All code is licensed under the **MIT License**.  
-Custom artwork and sprites are © 2025 [Your Name].
+Custom artwork and sprites are © 2025 AlexPinekone.
 
 ---
